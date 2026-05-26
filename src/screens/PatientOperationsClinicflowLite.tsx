@@ -195,7 +195,27 @@ export function PatientOperationsClinicflowLite({ actions, patients, queueCounts
       </div>
       {/* Dense Data Table */}
       <div className="bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col overflow-hidden">
-      <div className="overflow-x-auto">
+      <div className="md:hidden divide-y divide-outline-variant">
+      {visiblePatients.map((patient, index) => {
+      const actionId = rowActionIds[index];
+      return (
+      <div className="p-md flex flex-col gap-sm" key={patient.id} data-selected={patient.id === selectedPatientId}>
+      <div className="flex items-start justify-between gap-sm">
+      <div className="min-w-0">
+      <p className="font-data-mono text-data-mono text-on-surface font-semibold break-words">{patient.name}</p>
+      <p className="font-body-sm text-body-sm text-on-surface-variant mt-1">{getStageLocation(patient.stage)}</p>
+      </div>
+      {actionId ? <button className="text-outline hover:text-on-surface transition-colors shrink-0" type="button" aria-label={`Open ${patient.name}`} data-action-id={actionId} onClick={actions?.[actionId]}><EllipsisVertical className="text-[18px]" aria-hidden={true} focusable="false" /></button> : null}
+      </div>
+      <div className="flex flex-wrap items-center gap-xs">
+      <span className={`inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-label-sm ${getStatusTone(patient)}`}>{patient.status}</span>
+      <span className="font-body-sm text-body-sm text-on-surface break-words">{getNextAction(patient)}</span>
+      </div>
+      </div>
+      );
+      })}
+      </div>
+      <div className="hidden md:block">
       <table className="w-full text-left border-collapse">
       <thead className="bg-surface-container-low border-b border-outline-variant">
       <tr>
