@@ -7,6 +7,7 @@
 // 3. Wire interactive controls through the typed actions prop
 // 4. Replace placeholder data with props/state
 
+import { useMemo, useState } from "react";
 import { BarChart3, Bell, CheckCircle2, CircleUserRound, Clock, DoorOpen, HeartPulse, ListFilter, ListOrdered, Menu, Plus, Search, Settings, TriangleAlert, User, UserSearch } from "lucide-react";
 
 
@@ -17,6 +18,35 @@ export interface QueueAndStatusManagementClinicflowLiteProps {
 }
 
 export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStatusManagementClinicflowLiteProps) {
+  const [recordStages, setRecordStages] = useState({
+    sarah: "waiting",
+    michael: "waiting",
+    emily: "waiting",
+    robert: "triage",
+    lisa: "triage",
+    david: "room",
+  });
+  const [queueUpdate, setQueueUpdate] = useState("Queue ready for status updates.");
+  const laneCounts = useMemo(
+    () => ({
+      waiting: Object.values(recordStages).filter((stage) => stage === "waiting").length,
+      triage: Object.values(recordStages).filter((stage) => stage === "triage").length,
+      room: Object.values(recordStages).filter((stage) => stage === "room").length,
+      postVisit: Object.values(recordStages).filter((stage) => stage === "post-visit").length,
+    }),
+    [recordStages],
+  );
+  const updateRecordStage = (
+    recordId: keyof typeof recordStages,
+    stage: (typeof recordStages)[keyof typeof recordStages],
+    message: string,
+    actionId: QueueAndStatusManagementClinicflowLiteActionId,
+  ) => {
+    setRecordStages((current) => ({ ...current, [recordId]: stage }));
+    setQueueUpdate(message);
+    actions?.[actionId]?.();
+  };
+
   return (
     <>
       {/* SideNavBar (Desktop) */}
@@ -82,6 +112,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <div>
       <h2 className="font-headline-md text-headline-md text-on-surface">Queue Management</h2>
       <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">Real-time patient flow and status.</p>
+      <p className="font-label-sm text-label-sm text-primary mt-xs" aria-live="polite">{queueUpdate}</p>
       </div>
       <div className="flex gap-sm">
       <div className="flex items-center bg-surface-container-low rounded border border-outline-variant px-sm py-xs">
@@ -103,7 +134,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <span className="w-2 h-2 rounded-full bg-outline"></span>
                               Check-in
                           </h3>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">3</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">{laneCounts.waiting}</span>
       </div>
       <div className="p-sm flex flex-col gap-sm overflow-y-auto lane-scroll flex-1">
       {/* Card 1 */}
@@ -120,7 +151,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <Clock  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
                                       Wait: 12m
                                   </div>
-      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" type="button" data-action-id="move-to-triage-3" onClick={actions?.["move-to-triage-3"]}>
+      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" type="button" aria-label="Move to Triage" data-action-id="move-to-triage-3" onClick={() => updateRecordStage("sarah", "triage", "Sarah Jenkins moved to triage.", "move-to-triage-3")}>
                                       Move to Triage
                                   </button>
       </div>
@@ -142,7 +173,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <Clock  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
                                       Wait: 35m
                                   </div>
-      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" data-action-id="move-to-triage-4" onClick={actions?.["move-to-triage-4"]}>
+      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" aria-label="Move to Triage" data-action-id="move-to-triage-4" onClick={() => updateRecordStage("michael", "triage", "Michael Chang moved to triage.", "move-to-triage-4")}>
                                       Move to Triage
                                   </button>
       </div>
@@ -161,7 +192,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <Clock  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
                                       Wait: 5m
                                   </div>
-      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" data-action-id="move-to-triage-5" onClick={actions?.["move-to-triage-5"]}>
+      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" aria-label="Move to Triage" data-action-id="move-to-triage-5" onClick={() => updateRecordStage("emily", "triage", "Emily Davis moved to triage.", "move-to-triage-5")}>
                                       Move to Triage
                                   </button>
       </div>
@@ -175,7 +206,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <span className="w-2 h-2 rounded-full bg-tertiary-container"></span>
                               Triage
                           </h3>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">2</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">{laneCounts.triage}</span>
       </div>
       <div className="p-sm flex flex-col gap-sm overflow-y-auto lane-scroll flex-1">
       {/* Card */}
@@ -192,7 +223,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <HeartPulse  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
                                       Nurse Joy
                                   </div>
-      <button className="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded hover:opacity-90 transition-opacity" type="button" data-action-id="move-to-room-6" onClick={actions?.["move-to-room-6"]}>
+      <button className="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded hover:opacity-90 transition-opacity" type="button" aria-label="Move to Room" data-action-id="move-to-room-6" onClick={() => updateRecordStage("robert", "room", "Robert Wilson moved to room.", "move-to-room-6")}>
                                       Move to Room
                                   </button>
       </div>
@@ -211,7 +242,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <HeartPulse  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
                                       Nurse Sam
                                   </div>
-      <button className="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded hover:opacity-90 transition-opacity" type="button" data-action-id="move-to-room-7" onClick={actions?.["move-to-room-7"]}>
+      <button className="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded hover:opacity-90 transition-opacity" type="button" aria-label="Move to Room" data-action-id="move-to-room-7" onClick={() => updateRecordStage("lisa", "room", "Lisa Carter moved to room.", "move-to-room-7")}>
                                       Move to Room
                                   </button>
       </div>
@@ -225,7 +256,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <span className="w-2 h-2 rounded-full bg-primary"></span>
                               In-Room
                           </h3>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">1</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">{laneCounts.room}</span>
       </div>
       <div className="p-sm flex flex-col gap-sm overflow-y-auto lane-scroll flex-1">
       {/* Card */}
@@ -244,7 +275,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <Clock  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
                                       In Session: 18m
                                   </div>
-      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" data-action-id="post-visit-8" onClick={actions?.["post-visit-8"]}>
+      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" aria-label="Post-Visit" data-action-id="post-visit-8" onClick={() => updateRecordStage("david", "post-visit", "David Miller moved to post-visit.", "post-visit-8")}>
                                       Post-Visit
                                   </button>
       </div>
@@ -258,7 +289,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <span className="w-2 h-2 rounded-full bg-secondary"></span>
                               Post-Visit
                           </h3>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">0</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">{laneCounts.postVisit}</span>
       </div>
       <div className="p-sm flex flex-col gap-sm overflow-y-auto lane-scroll flex-1 items-center justify-center text-center">
       <CheckCircle2  style={{fontSize: "32px"}} className="text-outline-variant" aria-hidden={true} focusable="false" />

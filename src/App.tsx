@@ -79,11 +79,6 @@ export default function App() {
     dispatch({ type: 'recover', state: resetClinicflowLiteState(getBrowserStorage()) });
   };
 
-  const patientOperationsRecords = state.patients.map((patient) => ({
-    ...patient,
-    stage: state.queue.find((item) => item.patientId === patient.id)?.stage ?? 'waiting',
-  }));
-
   const patientOperationsActions = {
     'create-appointment-1': () => navigate('queue'),
     'add-patient-2': openEditor,
@@ -165,19 +160,13 @@ export default function App() {
       className="min-h-screen bg-background text-on-surface"
     >
       {state.route === 'patient-operations' ? (
-        <PatientOperationsClinicflowLite
-          actions={patientOperationsActions}
-          patients={patientOperationsRecords}
-          queueCounts={snapshot.counts}
-          selectedPatientId={state.selectedRecordId}
-        />
+        <PatientOperationsClinicflowLite actions={patientOperationsActions} />
       ) : null}
       {state.route === 'queue' ? <QueueAndStatusManagementClinicflowLite actions={queueActions} /> : null}
       {state.route === 'insights' ? <InsightsClinicflowLite actions={insightsActions} /> : null}
       {state.route === 'settings' ? <SettingsAndPreferencesClinicflowLite actions={settingsActions} /> : null}
       {state.route === 'patient-editor' ? (
         <PatientEditorClinicflowLite
-          patient={snapshot.selectedRecord ?? state.patients[0] ?? null}
           actions={{
             'arrow-back-1': () => navigate('patient-operations'),
             'cancel-2': () => navigate('patient-operations'),
