@@ -1,0 +1,2769 @@
+{
+  "generatedAt": "2026-05-26T00:39:25.545Z",
+  "screenCount": 6,
+  "screens": {
+    "09dfdaa7f1834f9db4b9aaccad63c2d3": {
+      "screenId": "09dfdaa7f1834f9db4b9aaccad63c2d3",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "header",
+          "layout": "flex-row",
+          "classes": [
+            "md:hidden",
+            "flex",
+            "justify-between",
+            "items-center",
+            "w-full",
+            "px-lg",
+            "py-sm",
+            "h-14",
+            "bg-surface",
+            "dark:bg-on-surface"
+          ],
+          "childCount": 2
+        },
+        {
+          "tag": "nav",
+          "layout": "flex-col",
+          "classes": [
+            "hidden",
+            "md:flex",
+            "fixed",
+            "left-0",
+            "top-0",
+            "h-full",
+            "flex-col",
+            "p-md",
+            "gap-sm",
+            "bg-surface-container-low"
+          ],
+          "childCount": 3
+        },
+        {
+          "tag": "main",
+          "layout": "flex-col",
+          "classes": [
+            "flex-grow",
+            "md:ml-64",
+            "p-margin",
+            "md:p-lg",
+            "lg:p-xl",
+            "flex",
+            "flex-col",
+            "gap-lg",
+            "bg-background"
+          ],
+          "childCount": 27
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "p-2",
+            "rounded-full",
+            "hover:bg-surface-container-low",
+            "dark:hover:bg-surface-variant",
+            "transition-colors",
+            "text-on-surface-variant",
+            "dark:text-outline-variant",
+            "cursor-pointer",
+            "active:opacity-80"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "account_circle",
+          "classes": [
+            "p-2",
+            "rounded-full",
+            "hover:bg-surface-container-low",
+            "dark:hover:bg-surface-variant",
+            "transition-colors",
+            "text-on-surface-variant",
+            "dark:text-outline-variant",
+            "cursor-pointer",
+            "active:opacity-80"
+          ],
+          "icon": "account_circle",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "classes": [
+            "w-full",
+            "bg-primary",
+            "text-on-primary",
+            "rounded-DEFAULT",
+            "py-sm",
+            "px-md",
+            "font-label-md",
+            "text-label-md",
+            "hover:opacity-90",
+            "transition-opacity"
+          ],
+          "icon": null,
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Reset to Defaults",
+          "classes": [
+            "px-md",
+            "py-sm",
+            "rounded-DEFAULT",
+            "border",
+            "border-primary",
+            "text-primary",
+            "font-label-md",
+            "text-label-md",
+            "hover:bg-surface-container",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "reset",
+          "expectedBehavior": "reset visible value/state, with confirmation if destructive"
+        },
+        {
+          "kind": "button",
+          "label": "Save Preferences",
+          "classes": [
+            "px-md",
+            "py-sm",
+            "rounded-DEFAULT",
+            "bg-primary",
+            "text-on-primary",
+            "font-label-md",
+            "text-label-md",
+            "hover:bg-primary/90",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "form-submit",
+          "expectedBehavior": "validate inputs and submit/apply changes"
+        },
+        {
+          "kind": "button",
+          "label": "Workflow",
+          "classes": [
+            "whitespace-nowrap",
+            "px-md",
+            "py-sm",
+            "text-left",
+            "font-label-md",
+            "text-label-md",
+            "bg-surface-container-low",
+            "text-primary",
+            "border-l-2",
+            "lg:border-l-4",
+            "border-primary",
+            "rounded-r-DEFAULT",
+            "lg:rounded-none",
+            "lg:rounded-r-DEFAULT",
+            "bg-primary-container/10"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Notifications",
+          "classes": [
+            "whitespace-nowrap",
+            "px-md",
+            "py-sm",
+            "text-left",
+            "font-label-md",
+            "text-label-md",
+            "text-on-surface-variant",
+            "hover:bg-surface-container-lowest",
+            "transition-colors",
+            "border-l-2",
+            "lg:border-l-4",
+            "border-transparent",
+            "hover:border-outline-variant",
+            "lg:rounded-r-DEFAULT"
+          ],
+          "icon": null,
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Display",
+          "classes": [
+            "whitespace-nowrap",
+            "px-md",
+            "py-sm",
+            "text-left",
+            "font-label-md",
+            "text-label-md",
+            "text-on-surface-variant",
+            "hover:bg-surface-container-lowest",
+            "transition-colors",
+            "border-l-2",
+            "lg:border-l-4",
+            "border-transparent",
+            "hover:border-outline-variant",
+            "lg:rounded-r-DEFAULT"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "select",
+          "label": "density",
+          "placeholder": "",
+          "name": "density",
+          "classes": [
+            "w-full",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-sm",
+            "font-body-md",
+            "text-body-md",
+            "bg-surface",
+            "text-on-surface",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "outline-none"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "select",
+          "label": "refresh_rate",
+          "placeholder": "",
+          "name": "refresh_rate",
+          "classes": [
+            "w-full",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-sm",
+            "font-body-md",
+            "text-body-md",
+            "bg-surface",
+            "text-on-surface",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "outline-none"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "checkbox",
+          "label": "checkbox",
+          "placeholder": "",
+          "name": "",
+          "classes": [
+            "form-checkbox",
+            "h-4",
+            "w-4",
+            "text-primary",
+            "border-outline-variant",
+            "rounded-sm",
+            "focus:ring-primary",
+            "focus:ring-offset-0",
+            "bg-surface"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "select",
+          "label": "default_room",
+          "placeholder": "",
+          "name": "default_room",
+          "classes": [
+            "w-full",
+            "sm:w-1/2",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-sm",
+            "font-body-md",
+            "text-body-md",
+            "bg-surface",
+            "text-on-surface",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "outline-none"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "number",
+          "label": "number",
+          "placeholder": "",
+          "name": "",
+          "classes": [
+            "w-24",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-sm",
+            "font-data-mono",
+            "text-data-mono",
+            "bg-surface",
+            "text-on-surface",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "outline-none"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "person_search",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "format_list_numbered",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "analytics",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "icon-filled"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "notifications",
+        "account_circle",
+        "person_search",
+        "format_list_numbered",
+        "analytics",
+        "settings",
+        "info"
+      ],
+      "images": [],
+      "cssVars": {},
+      "colorPalette": {
+        "on-error": "#ffffff",
+        "on-tertiary-fixed": "#360f00",
+        "primary": "#003178",
+        "surface-container": "#ededf5",
+        "inverse-surface": "#2e3036",
+        "surface-bright": "#faf8ff",
+        "on-surface": "#1a1b21",
+        "surface-tint": "#2b5bb5",
+        "surface-container-highest": "#e2e2ea",
+        "secondary-fixed-dim": "#88d982",
+        "background": "#faf8ff",
+        "on-secondary-fixed-variant": "#005312",
+        "primary-fixed-dim": "#b0c6ff",
+        "inverse-primary": "#b0c6ff",
+        "on-primary": "#ffffff",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#a0f399",
+        "on-surface-variant": "#434652",
+        "on-primary-fixed": "#001945",
+        "tertiary-fixed-dim": "#ffb596",
+        "secondary-fixed": "#a3f69c",
+        "on-primary-fixed-variant": "#00429c",
+        "primary-container": "#0d47a1",
+        "secondary": "#1b6d24",
+        "surface-dim": "#d9d9e1",
+        "tertiary-container": "#853100",
+        "tertiary-fixed": "#ffdbcd",
+        "tertiary": "#602100",
+        "on-tertiary": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "error": "#ba1a1a",
+        "surface-container-high": "#e8e7f0",
+        "primary-fixed": "#d9e2ff",
+        "surface-container-low": "#f3f3fb",
+        "on-background": "#1a1b21",
+        "on-primary-container": "#a1bbff",
+        "on-error-container": "#93000a",
+        "on-secondary-container": "#217128",
+        "inverse-on-surface": "#f0f0f8",
+        "surface": "#faf8ff",
+        "outline": "#737783",
+        "error-container": "#ffdad6",
+        "on-secondary-fixed": "#002204",
+        "on-tertiary-container": "#ffa781",
+        "outline-variant": "#c3c6d4",
+        "surface-variant": "#e2e2ea"
+      },
+      "fonts": [
+        "Material Symbols Outlined",
+        "Inter"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "icon": "person_search",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "icon": "format_list_numbered",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "account_circle",
+          "icon": "account_circle",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "icon": null,
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Reset to Defaults",
+          "icon": null,
+          "action": "reset",
+          "expectedBehavior": "reset visible value/state, with confirmation if destructive"
+        },
+        {
+          "kind": "button",
+          "label": "Save Preferences",
+          "icon": null,
+          "action": "form-submit",
+          "expectedBehavior": "validate inputs and submit/apply changes"
+        },
+        {
+          "kind": "button",
+          "label": "Workflow",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Notifications",
+          "icon": null,
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "Display",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "input",
+          "label": "density",
+          "type": "select",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "refresh_rate",
+          "type": "select",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "checkbox",
+          "type": "checkbox",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "default_room",
+          "type": "select",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "number",
+          "type": "number",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "icon": "person_search",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "icon": "format_list_numbered",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "Workflow",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "Notifications",
+          "icon": null,
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "Display",
+          "icon": null,
+          "active": false
+        }
+      ],
+      "title": "Settings and Preferences - ClinicFlow Lite"
+    },
+    "a389196c06304be58249b4ddb3b584dd": {
+      "screenId": "a389196c06304be58249b4ddb3b584dd",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "aside",
+          "layout": "flex-col",
+          "classes": [
+            "fixed",
+            "left-0",
+            "top-0",
+            "h-full",
+            "flex",
+            "flex-col",
+            "p-md",
+            "gap-sm",
+            "bg-surface-container-low",
+            "border-r"
+          ],
+          "childCount": 5
+        },
+        {
+          "tag": "main",
+          "layout": "flex-col",
+          "classes": [
+            "flex-1",
+            "flex",
+            "flex-col",
+            "min-w-0",
+            "md:ml-64",
+            "bg-background"
+          ],
+          "childCount": 82
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "classes": [
+            "w-full",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-sm",
+            "bg-primary",
+            "text-on-primary",
+            "py-2",
+            "px-md",
+            "rounded",
+            "font-label-md",
+            "text-label-md",
+            "hover:bg-primary/90",
+            "transition-colors"
+          ],
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "classes": [
+            "w-8",
+            "h-8",
+            "flex",
+            "items-center",
+            "justify-center",
+            "rounded",
+            "text-on-surface-variant",
+            "hover:bg-surface-container-low",
+            "transition-colors",
+            "relative"
+          ],
+          "icon": "notifications",
+          "action": "navigate",
+          "expectedBehavior": "navigate:/notifications",
+          "expectedRoute": "/notifications",
+          "routeInferred": true
+        },
+        {
+          "kind": "button",
+          "label": "Export Summary",
+          "classes": [
+            "flex",
+            "items-center",
+            "gap-xs",
+            "px-md",
+            "py-1.5",
+            "border",
+            "border-primary",
+            "text-primary",
+            "rounded",
+            "font-label-md",
+            "text-label-md",
+            "hover:bg-primary/5",
+            "transition-colors"
+          ],
+          "icon": "download",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "more_vert",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:text-on-surface"
+          ],
+          "icon": "more_vert",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search patients, IDs...",
+          "placeholder": "Search patients, IDs...",
+          "name": "",
+          "classes": [
+            "w-full",
+            "h-8",
+            "pl-8",
+            "pr-sm",
+            "bg-surface",
+            "border",
+            "border-outline-variant",
+            "rounded",
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface",
+            "placeholder:text-outline",
+            "focus:outline-none",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "transition-shadow"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "person_search",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "format_list_numbered",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]",
+            "fill-icon"
+          ],
+          "icon": "analytics",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined",
+            "text-[20px]"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "medical_services",
+        "person_search",
+        "format_list_numbered",
+        "analytics",
+        "settings",
+        "add",
+        "search",
+        "notifications",
+        "calendar_today",
+        "download",
+        "groups",
+        "person",
+        "trending_up",
+        "schedule",
+        "timer",
+        "meeting_room",
+        "bed",
+        "more_vert",
+        "check",
+        "arrow_forward",
+        "priority_high",
+        "how_to_reg"
+      ],
+      "images": [
+        {
+          "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuAOEI2KeELx2ZUMtUcn_Ktxnp79V6R76TGqv7oNpvE_TRzwQhkmWPtiYyZhDmBe1ck-TFpo56bSsqRaGn4AYf34TzWkTwjsvSsw98dJzk5NTbBsyXp1gikVXTFPSDN8BWspb0b_ga5vEVYHL54D-p",
+          "alt": "Clinic Administrator"
+        }
+      ],
+      "cssVars": {},
+      "colorPalette": {
+        "on-error": "#ffffff",
+        "on-tertiary-fixed": "#360f00",
+        "primary": "#003178",
+        "surface-container": "#ededf5",
+        "inverse-surface": "#2e3036",
+        "surface-bright": "#faf8ff",
+        "on-surface": "#1a1b21",
+        "surface-tint": "#2b5bb5",
+        "surface-container-highest": "#e2e2ea",
+        "secondary-fixed-dim": "#88d982",
+        "background": "#faf8ff",
+        "on-secondary-fixed-variant": "#005312",
+        "primary-fixed-dim": "#b0c6ff",
+        "inverse-primary": "#b0c6ff",
+        "on-primary": "#ffffff",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#a0f399",
+        "on-surface-variant": "#434652",
+        "on-primary-fixed": "#001945",
+        "tertiary-fixed-dim": "#ffb596",
+        "secondary-fixed": "#a3f69c",
+        "on-primary-fixed-variant": "#00429c",
+        "primary-container": "#0d47a1",
+        "secondary": "#1b6d24",
+        "surface-dim": "#d9d9e1",
+        "tertiary-container": "#853100",
+        "tertiary-fixed": "#ffdbcd",
+        "tertiary": "#602100",
+        "on-tertiary": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "error": "#ba1a1a",
+        "surface-container-high": "#e8e7f0",
+        "primary-fixed": "#d9e2ff",
+        "surface-container-low": "#f3f3fb",
+        "on-background": "#1a1b21",
+        "on-primary-container": "#a1bbff",
+        "on-error-container": "#93000a",
+        "on-secondary-container": "#217128",
+        "inverse-on-surface": "#f0f0f8",
+        "surface": "#faf8ff",
+        "outline": "#737783",
+        "error-container": "#ffdad6",
+        "on-secondary-fixed": "#002204",
+        "on-tertiary-container": "#ffa781",
+        "outline-variant": "#c3c6d4",
+        "surface-variant": "#e2e2ea"
+      },
+      "fonts": [
+        "Material Symbols Outlined"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col",
+        "gap": "1"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "icon": "person_search",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "icon": "format_list_numbered",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "notifications",
+          "icon": "notifications",
+          "action": "navigate",
+          "route": "/notifications",
+          "expectedBehavior": "navigate:/notifications"
+        },
+        {
+          "kind": "button",
+          "label": "Export Summary",
+          "icon": "download",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "more_vert",
+          "icon": "more_vert",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "input",
+          "label": "Search patients, IDs...",
+          "type": "text",
+          "placeholder": "Search patients, IDs...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "icon": "person_search",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "icon": "format_list_numbered",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": false
+        }
+      ],
+      "title": "Insights - ClinicFlow Lite"
+    },
+    "ac1496e2de6b4b8d93c055084cbef725": {
+      "screenId": "ac1496e2de6b4b8d93c055084cbef725",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "nav",
+          "layout": "flex-col",
+          "classes": [
+            "hidden",
+            "md:flex",
+            "fixed",
+            "left-0",
+            "top-0",
+            "h-full",
+            "w-64",
+            "flex-col",
+            "p-md",
+            "gap-sm"
+          ],
+          "childCount": 8
+        },
+        {
+          "tag": "main",
+          "layout": "flex-col",
+          "classes": [
+            "flex-1",
+            "flex",
+            "flex-col",
+            "ml-0",
+            "md:ml-64",
+            "h-full",
+            "bg-background",
+            "overflow-y-auto"
+          ],
+          "childCount": 29
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "classes": [
+            "w-full",
+            "bg-primary",
+            "text-on-primary",
+            "font-label-md",
+            "text-label-md",
+            "py-sm",
+            "px-md",
+            "rounded",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-xs",
+            "hover:bg-surface-tint",
+            "transition-colors"
+          ],
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Add Patient",
+          "classes": [
+            "bg-primary",
+            "text-on-primary",
+            "font-label-md",
+            "text-label-md",
+            "py-2",
+            "px-4",
+            "rounded",
+            "whitespace-nowrap",
+            "hover:bg-surface-tint",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "gap-xs"
+          ],
+          "icon": "person_add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "more_vert",
+          "classes": [
+            "text-outline",
+            "hover:text-on-surface",
+            "transition-colors"
+          ],
+          "icon": "more_vert",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "chevron_left",
+          "classes": [
+            "text-outline",
+            "hover:text-on-surface",
+            "disabled:opacity-50"
+          ],
+          "icon": "chevron_left",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "chevron_right",
+          "classes": [
+            "text-outline",
+            "hover:text-on-surface"
+          ],
+          "icon": "chevron_right",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "local_hospital",
+          "classes": [],
+          "icon": "local_hospital",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "person",
+          "classes": [],
+          "icon": "person",
+          "action": "navigate",
+          "expectedRoute": "/profile",
+          "routeInferred": true,
+          "expectedBehavior": "navigate:/profile"
+        },
+        {
+          "kind": "button",
+          "label": "Clinic Administrator",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search patients...",
+          "placeholder": "Search patients...",
+          "name": "",
+          "classes": [
+            "w-full",
+            "pl-9",
+            "pr-3",
+            "py-2",
+            "bg-surface-container-lowest",
+            "border",
+            "border-outline-variant",
+            "rounded",
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:border-primary",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "transition-all"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "person_search",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "format_list_numbered",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "analytics",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "local_hospital",
+        "person_search",
+        "format_list_numbered",
+        "analytics",
+        "settings",
+        "add",
+        "person",
+        "search",
+        "person_add",
+        "airline_seat_recline_normal",
+        "vital_signs",
+        "warning",
+        "more_vert",
+        "chevron_left",
+        "chevron_right"
+      ],
+      "images": [],
+      "cssVars": {},
+      "colorPalette": {
+        "on-error": "#ffffff",
+        "on-tertiary-fixed": "#360f00",
+        "primary": "#003178",
+        "surface-container": "#ededf5",
+        "inverse-surface": "#2e3036",
+        "surface-bright": "#faf8ff",
+        "on-surface": "#1a1b21",
+        "surface-tint": "#2b5bb5",
+        "surface-container-highest": "#e2e2ea",
+        "secondary-fixed-dim": "#88d982",
+        "background": "#faf8ff",
+        "on-secondary-fixed-variant": "#005312",
+        "primary-fixed-dim": "#b0c6ff",
+        "inverse-primary": "#b0c6ff",
+        "on-primary": "#ffffff",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#a0f399",
+        "on-surface-variant": "#434652",
+        "on-primary-fixed": "#001945",
+        "tertiary-fixed-dim": "#ffb596",
+        "secondary-fixed": "#a3f69c",
+        "on-primary-fixed-variant": "#00429c",
+        "primary-container": "#0d47a1",
+        "secondary": "#1b6d24",
+        "surface-dim": "#d9d9e1",
+        "tertiary-container": "#853100",
+        "tertiary-fixed": "#ffdbcd",
+        "tertiary": "#602100",
+        "on-tertiary": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "error": "#ba1a1a",
+        "surface-container-high": "#e8e7f0",
+        "primary-fixed": "#d9e2ff",
+        "surface-container-low": "#f3f3fb",
+        "on-background": "#1a1b21",
+        "on-primary-container": "#a1bbff",
+        "on-error-container": "#93000a",
+        "on-secondary-container": "#217128",
+        "inverse-on-surface": "#f0f0f8",
+        "surface": "#faf8ff",
+        "outline": "#737783",
+        "error-container": "#ffdad6",
+        "on-secondary-fixed": "#002204",
+        "on-tertiary-container": "#ffa781",
+        "outline-variant": "#c3c6d4",
+        "surface-variant": "#e2e2ea"
+      },
+      "fonts": [
+        "Material Symbols Outlined",
+        "Inter"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "icon": "person_search",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "icon": "format_list_numbered",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Add Patient",
+          "icon": "person_add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "more_vert",
+          "icon": "more_vert",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "chevron_left",
+          "icon": "chevron_left",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "chevron_right",
+          "icon": "chevron_right",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "local_hospital",
+          "icon": "local_hospital",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "person",
+          "icon": "person",
+          "action": "navigate",
+          "route": "/profile",
+          "expectedBehavior": "navigate:/profile"
+        },
+        {
+          "kind": "button",
+          "label": "Clinic Administrator",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "input",
+          "label": "Search patients...",
+          "type": "text",
+          "placeholder": "Search patients...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "local_hospital",
+          "icon": "local_hospital",
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "icon": "person_search",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "icon": "format_list_numbered",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "icon": "add",
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "person",
+          "icon": "person",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "Clinic Administrator",
+          "icon": null,
+          "active": false
+        }
+      ],
+      "title": "Patient Operations - ClinicFlow Lite"
+    },
+    "c995f9bc64ea44429aca6ec8658ff3af": {
+      "screenId": "c995f9bc64ea44429aca6ec8658ff3af",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "nav",
+          "layout": "flex-col",
+          "classes": [
+            "fixed",
+            "left-0",
+            "top-0",
+            "h-full",
+            "flex",
+            "flex-col",
+            "p-md",
+            "gap-sm",
+            "bg-surface-container-low",
+            "dark:bg-surface-dim"
+          ],
+          "childCount": 6
+        },
+        {
+          "tag": "main",
+          "layout": "flex-row",
+          "classes": [
+            "ml-64",
+            "flex-1",
+            "p-xl"
+          ],
+          "childCount": 10
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "classes": [
+            "w-full",
+            "flex",
+            "justify-center",
+            "items-center",
+            "gap-sm",
+            "bg-primary",
+            "text-on-primary",
+            "px-md",
+            "py-sm",
+            "rounded",
+            "font-label-md",
+            "text-label-md",
+            "hover:opacity-90",
+            "transition-opacity"
+          ],
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Empty State",
+          "classes": [
+            "px-md",
+            "py-xs",
+            "rounded",
+            "bg-surface",
+            "text-on-surface",
+            "shadow-sm",
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Error State",
+          "classes": [
+            "px-md",
+            "py-xs",
+            "rounded",
+            "text-on-surface-variant",
+            "hover:text-on-surface",
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Clear Filters",
+          "classes": [
+            "px-md",
+            "py-sm",
+            "bg-transparent",
+            "border",
+            "border-primary",
+            "text-primary",
+            "font-label-md",
+            "text-label-md",
+            "rounded",
+            "hover:bg-primary-container",
+            "hover:text-on-primary-container",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "search",
+          "expectedBehavior": "filter/search visible results from input/query"
+        },
+        {
+          "kind": "button",
+          "label": "Create Patient",
+          "classes": [
+            "px-md",
+            "py-sm",
+            "bg-primary",
+            "text-on-primary",
+            "font-label-md",
+            "text-label-md",
+            "rounded",
+            "hover:opacity-90",
+            "transition-opacity",
+            "flex",
+            "items-center",
+            "gap-xs"
+          ],
+          "icon": "person_add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Retry Connection",
+          "classes": [
+            "px-lg",
+            "py-sm",
+            "bg-primary",
+            "text-on-primary",
+            "font-label-md",
+            "text-label-md",
+            "rounded",
+            "hover:opacity-90",
+            "transition-opacity",
+            "flex",
+            "items-center",
+            "gap-xs"
+          ],
+          "icon": "refresh",
+          "action": "retry",
+          "expectedBehavior": "retry the failed action and show loading/error feedback"
+        },
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "person_search",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "format_list_numbered",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "analytics",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "font-label-md",
+            "text-label-md"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "person_search",
+        "format_list_numbered",
+        "analytics",
+        "settings",
+        "add",
+        "search_off",
+        "person_add",
+        "cloud_off",
+        "refresh"
+      ],
+      "images": [],
+      "cssVars": {},
+      "colorPalette": {
+        "on-error": "#ffffff",
+        "on-tertiary-fixed": "#360f00",
+        "primary": "#003178",
+        "surface-container": "#ededf5",
+        "inverse-surface": "#2e3036",
+        "surface-bright": "#faf8ff",
+        "on-surface": "#1a1b21",
+        "surface-tint": "#2b5bb5",
+        "surface-container-highest": "#e2e2ea",
+        "secondary-fixed-dim": "#88d982",
+        "background": "#faf8ff",
+        "on-secondary-fixed-variant": "#005312",
+        "primary-fixed-dim": "#b0c6ff",
+        "inverse-primary": "#b0c6ff",
+        "on-primary": "#ffffff",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#a0f399",
+        "on-surface-variant": "#434652",
+        "on-primary-fixed": "#001945",
+        "tertiary-fixed-dim": "#ffb596",
+        "secondary-fixed": "#a3f69c",
+        "on-primary-fixed-variant": "#00429c",
+        "primary-container": "#0d47a1",
+        "secondary": "#1b6d24",
+        "surface-dim": "#d9d9e1",
+        "tertiary-container": "#853100",
+        "tertiary-fixed": "#ffdbcd",
+        "tertiary": "#602100",
+        "on-tertiary": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "error": "#ba1a1a",
+        "surface-container-high": "#e8e7f0",
+        "primary-fixed": "#d9e2ff",
+        "surface-container-low": "#f3f3fb",
+        "on-background": "#1a1b21",
+        "on-primary-container": "#a1bbff",
+        "on-error-container": "#93000a",
+        "on-secondary-container": "#217128",
+        "inverse-on-surface": "#f0f0f8",
+        "surface": "#faf8ff",
+        "outline": "#737783",
+        "error-container": "#ffdad6",
+        "on-secondary-fixed": "#002204",
+        "on-tertiary-container": "#ffa781",
+        "outline-variant": "#c3c6d4",
+        "surface-variant": "#e2e2ea"
+      },
+      "fonts": [
+        "Material Symbols Outlined",
+        "Inter"
+      ],
+      "layoutHints": {
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "icon": "person_search",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "icon": "format_list_numbered",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Empty State",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Error State",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Clear Filters",
+          "icon": null,
+          "action": "search",
+          "expectedBehavior": "filter/search visible results from input/query"
+        },
+        {
+          "kind": "button",
+          "label": "Create Patient",
+          "icon": "person_add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Retry Connection",
+          "icon": "refresh",
+          "action": "retry",
+          "expectedBehavior": "retry the failed action and show loading/error feedback"
+        },
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "icon": "person_search",
+          "route": "#",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "icon": "format_list_numbered",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "icon": "add",
+          "active": true
+        }
+      ],
+      "title": "Empty and Error Recovery - ClinicFlow Lite"
+    },
+    "edea961bc55a4029824997fc659d179a": {
+      "screenId": "edea961bc55a4029824997fc659d179a",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "main",
+          "layout": "flex-row",
+          "classes": [
+            "flex-grow",
+            "flex",
+            "items-center",
+            "justify-center",
+            "p-md"
+          ],
+          "childCount": 20
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "arrow_back",
+          "classes": [
+            "text-on-surface-variant",
+            "hover:bg-surface-container-low",
+            "p-sm",
+            "rounded-full",
+            "transition-colors",
+            "flex",
+            "items-center",
+            "justify-center"
+          ],
+          "icon": "arrow_back",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Cancel",
+          "classes": [
+            "px-md",
+            "py-sm",
+            "rounded-DEFAULT",
+            "border",
+            "border-primary",
+            "text-primary",
+            "font-label-md",
+            "text-label-md",
+            "hover:bg-surface-container-low",
+            "transition-colors",
+            "bg-transparent"
+          ],
+          "icon": null,
+          "action": "dismiss",
+          "expectedBehavior": "close dialog/panel or return to previous state"
+        },
+        {
+          "kind": "button",
+          "label": "Save Changes",
+          "classes": [
+            "px-md",
+            "py-sm",
+            "rounded-DEFAULT",
+            "bg-primary",
+            "text-on-primary",
+            "font-label-md",
+            "text-label-md",
+            "hover:bg-primary-container",
+            "hover:text-on-primary-container",
+            "transition-colors",
+            "shadow-sm"
+          ],
+          "icon": null,
+          "action": "form-submit",
+          "expectedBehavior": "validate inputs and submit/apply changes"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "fullName",
+          "placeholder": "",
+          "name": "fullName",
+          "classes": [
+            "w-full",
+            "bg-surface-container-lowest",
+            "border",
+            "border-error",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-[6px]",
+            "font-body-md",
+            "text-body-md",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:ring-1",
+            "focus:ring-error",
+            "focus:border-error",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "date",
+          "label": "dob",
+          "placeholder": "",
+          "name": "dob",
+          "classes": [
+            "w-full",
+            "bg-surface-container-lowest",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-[6px]",
+            "font-body-md",
+            "text-body-md",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "focus:border-primary",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "select",
+          "label": "gender",
+          "placeholder": "",
+          "name": "gender",
+          "classes": [
+            "w-full",
+            "bg-surface-container-lowest",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-[6px]",
+            "font-body-md",
+            "text-body-md",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "focus:border-primary",
+            "transition-colors",
+            "appearance-none"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "tel",
+          "label": "phone",
+          "placeholder": "",
+          "name": "phone",
+          "classes": [
+            "w-full",
+            "bg-surface-container-lowest",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-[6px]",
+            "font-body-md",
+            "text-body-md",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "focus:border-primary",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "email",
+          "label": "email",
+          "placeholder": "",
+          "name": "email",
+          "classes": [
+            "w-full",
+            "bg-surface-container-lowest",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-[6px]",
+            "font-body-md",
+            "text-body-md",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "focus:border-primary",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "textarea",
+          "label": "reason",
+          "placeholder": "",
+          "name": "reason",
+          "classes": [
+            "w-full",
+            "bg-surface-container-lowest",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-sm",
+            "font-body-md",
+            "text-body-md",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "focus:border-primary",
+            "transition-colors",
+            "resize-none"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "insurance",
+          "placeholder": "",
+          "name": "insurance",
+          "classes": [
+            "w-full",
+            "bg-surface-container-lowest",
+            "border",
+            "border-outline-variant",
+            "rounded-DEFAULT",
+            "px-sm",
+            "py-[6px]",
+            "font-body-md",
+            "text-body-md",
+            "text-on-surface",
+            "focus:outline-none",
+            "focus:ring-1",
+            "focus:ring-primary",
+            "focus:border-primary",
+            "transition-colors"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [],
+      "cards": [],
+      "icons": [
+        "arrow_back",
+        "error",
+        "warning"
+      ],
+      "images": [],
+      "cssVars": {},
+      "colorPalette": {
+        "on-error": "#ffffff",
+        "on-tertiary-fixed": "#360f00",
+        "primary": "#003178",
+        "surface-container": "#ededf5",
+        "inverse-surface": "#2e3036",
+        "surface-bright": "#faf8ff",
+        "on-surface": "#1a1b21",
+        "surface-tint": "#2b5bb5",
+        "surface-container-highest": "#e2e2ea",
+        "secondary-fixed-dim": "#88d982",
+        "background": "#faf8ff",
+        "on-secondary-fixed-variant": "#005312",
+        "primary-fixed-dim": "#b0c6ff",
+        "inverse-primary": "#b0c6ff",
+        "on-primary": "#ffffff",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#a0f399",
+        "on-surface-variant": "#434652",
+        "on-primary-fixed": "#001945",
+        "tertiary-fixed-dim": "#ffb596",
+        "secondary-fixed": "#a3f69c",
+        "on-primary-fixed-variant": "#00429c",
+        "primary-container": "#0d47a1",
+        "secondary": "#1b6d24",
+        "surface-dim": "#d9d9e1",
+        "tertiary-container": "#853100",
+        "tertiary-fixed": "#ffdbcd",
+        "tertiary": "#602100",
+        "on-tertiary": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "error": "#ba1a1a",
+        "surface-container-high": "#e8e7f0",
+        "primary-fixed": "#d9e2ff",
+        "surface-container-low": "#f3f3fb",
+        "on-background": "#1a1b21",
+        "on-primary-container": "#a1bbff",
+        "on-error-container": "#93000a",
+        "on-secondary-container": "#217128",
+        "inverse-on-surface": "#f0f0f8",
+        "surface": "#faf8ff",
+        "outline": "#737783",
+        "error-container": "#ffdad6",
+        "on-secondary-fixed": "#002204",
+        "on-tertiary-container": "#ffa781",
+        "outline-variant": "#c3c6d4",
+        "surface-variant": "#e2e2ea"
+      },
+      "fonts": [
+        "Inter",
+        "Material Symbols Outlined"
+      ],
+      "layoutHints": {
+        "gridCols": 1,
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "button",
+          "label": "arrow_back",
+          "icon": "arrow_back",
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Cancel",
+          "icon": null,
+          "action": "dismiss",
+          "expectedBehavior": "close dialog/panel or return to previous state"
+        },
+        {
+          "kind": "button",
+          "label": "Save Changes",
+          "icon": null,
+          "action": "form-submit",
+          "expectedBehavior": "validate inputs and submit/apply changes"
+        },
+        {
+          "kind": "input",
+          "label": "fullName",
+          "type": "text",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "dob",
+          "type": "date",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "gender",
+          "type": "select",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "phone",
+          "type": "tel",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "email",
+          "type": "email",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "reason",
+          "type": "textarea",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        },
+        {
+          "kind": "input",
+          "label": "insurance",
+          "type": "text",
+          "placeholder": "",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [],
+      "title": "Patient Editor - ClinicFlow Lite"
+    },
+    "ef6d8a8009d34184ac69e723a28e76c5": {
+      "screenId": "ef6d8a8009d34184ac69e723a28e76c5",
+      "materialSymbolsRequired": true,
+      "sections": [
+        {
+          "tag": "nav",
+          "layout": "flex-col",
+          "classes": [
+            "hidden",
+            "md:flex",
+            "flex-col",
+            "bg-surface-container-low",
+            "dark:bg-surface-dim",
+            "border-r",
+            "border-outline-variant",
+            "dark:border-outline",
+            "fixed",
+            "left-0"
+          ],
+          "childCount": 8
+        },
+        {
+          "tag": "main",
+          "layout": "flex-col",
+          "classes": [
+            "flex-1",
+            "flex",
+            "flex-col",
+            "md:ml-64",
+            "h-full",
+            "relative"
+          ],
+          "childCount": 49
+        }
+      ],
+      "buttons": [
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "classes": [
+            "bg-primary",
+            "text-on-primary",
+            "font-label-md",
+            "text-label-md",
+            "py-sm",
+            "px-md",
+            "rounded-lg",
+            "w-full",
+            "flex",
+            "items-center",
+            "justify-center",
+            "gap-sm",
+            "mb-md",
+            "hover:opacity-90",
+            "transition-opacity"
+          ],
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Filter",
+          "classes": [
+            "bg-surface-container-low",
+            "border",
+            "border-outline-variant",
+            "text-on-surface",
+            "font-label-md",
+            "text-label-md",
+            "py-xs",
+            "px-sm",
+            "rounded",
+            "flex",
+            "items-center",
+            "gap-xs",
+            "hover:bg-surface-container-highest",
+            "transition-colors"
+          ],
+          "icon": "filter_list",
+          "action": "search",
+          "expectedBehavior": "filter/search visible results from input/query"
+        },
+        {
+          "kind": "button",
+          "label": "Move to Triage",
+          "classes": [
+            "text-primary",
+            "font-label-sm",
+            "text-label-sm",
+            "border",
+            "border-primary",
+            "px-2",
+            "py-1",
+            "rounded",
+            "hover:bg-primary-fixed",
+            "hover:text-on-primary-fixed",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Move to Room",
+          "classes": [
+            "bg-primary",
+            "text-on-primary",
+            "font-label-sm",
+            "text-label-sm",
+            "px-2",
+            "py-1",
+            "rounded",
+            "hover:opacity-90",
+            "transition-opacity"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Post-Visit",
+          "classes": [
+            "text-primary",
+            "font-label-sm",
+            "text-label-sm",
+            "border",
+            "border-primary",
+            "px-2",
+            "py-1",
+            "rounded",
+            "hover:bg-primary-fixed",
+            "transition-colors"
+          ],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "person",
+          "classes": [],
+          "icon": "person",
+          "action": "navigate",
+          "expectedRoute": "/profile",
+          "routeInferred": true,
+          "expectedBehavior": "navigate:/profile"
+        },
+        {
+          "kind": "button",
+          "label": "Clinic Administrator",
+          "classes": [],
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        }
+      ],
+      "inputs": [
+        {
+          "kind": "input",
+          "type": "text",
+          "label": "Search patient...",
+          "placeholder": "Search patient...",
+          "name": "",
+          "classes": [
+            "bg-transparent",
+            "border-none",
+            "focus:ring-0",
+            "font-body-sm",
+            "text-body-sm",
+            "text-on-surface",
+            "w-48",
+            "p-0"
+          ],
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "navLinks": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "person_search",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "format_list_numbered",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "analytics",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "href": "#",
+          "classes": [
+            "material-symbols-outlined"
+          ],
+          "icon": "settings",
+          "action": "navigate",
+          "expectedBehavior": "navigate:#"
+        }
+      ],
+      "cards": [],
+      "icons": [
+        "add",
+        "person_search",
+        "format_list_numbered",
+        "analytics",
+        "settings",
+        "person",
+        "menu",
+        "notifications",
+        "account_circle",
+        "search",
+        "filter_list",
+        "schedule",
+        "warning",
+        "vital_signs",
+        "meeting_room",
+        "check_circle"
+      ],
+      "images": [],
+      "cssVars": {},
+      "colorPalette": {
+        "on-error": "#ffffff",
+        "on-tertiary-fixed": "#360f00",
+        "primary": "#003178",
+        "surface-container": "#ededf5",
+        "inverse-surface": "#2e3036",
+        "surface-bright": "#faf8ff",
+        "on-surface": "#1a1b21",
+        "surface-tint": "#2b5bb5",
+        "surface-container-highest": "#e2e2ea",
+        "secondary-fixed-dim": "#88d982",
+        "background": "#faf8ff",
+        "on-secondary-fixed-variant": "#005312",
+        "primary-fixed-dim": "#b0c6ff",
+        "inverse-primary": "#b0c6ff",
+        "on-primary": "#ffffff",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#a0f399",
+        "on-surface-variant": "#434652",
+        "on-primary-fixed": "#001945",
+        "tertiary-fixed-dim": "#ffb596",
+        "secondary-fixed": "#a3f69c",
+        "on-primary-fixed-variant": "#00429c",
+        "primary-container": "#0d47a1",
+        "secondary": "#1b6d24",
+        "surface-dim": "#d9d9e1",
+        "tertiary-container": "#853100",
+        "tertiary-fixed": "#ffdbcd",
+        "tertiary": "#602100",
+        "on-tertiary": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "on-tertiary-fixed-variant": "#7d2d00",
+        "error": "#ba1a1a",
+        "surface-container-high": "#e8e7f0",
+        "primary-fixed": "#d9e2ff",
+        "surface-container-low": "#f3f3fb",
+        "on-background": "#1a1b21",
+        "on-primary-container": "#a1bbff",
+        "on-error-container": "#93000a",
+        "on-secondary-container": "#217128",
+        "inverse-on-surface": "#f0f0f8",
+        "surface": "#faf8ff",
+        "outline": "#737783",
+        "error-container": "#ffdad6",
+        "on-secondary-fixed": "#002204",
+        "on-tertiary-container": "#ffa781",
+        "outline-variant": "#c3c6d4",
+        "surface-variant": "#e2e2ea"
+      },
+      "fonts": [
+        "Material Symbols Outlined",
+        "Inter"
+      ],
+      "layoutHints": {
+        "flexDirection": "col"
+      },
+      "behaviorContract": [
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "icon": "person_search",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "icon": "format_list_numbered",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "expectedBehavior": "navigate:#"
+        },
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "icon": "add",
+          "action": "create",
+          "expectedBehavior": "open create flow or add a new item/state"
+        },
+        {
+          "kind": "button",
+          "label": "Filter",
+          "icon": "filter_list",
+          "action": "search",
+          "expectedBehavior": "filter/search visible results from input/query"
+        },
+        {
+          "kind": "button",
+          "label": "Move to Triage",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Move to Room",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "Post-Visit",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "button",
+          "label": "person",
+          "icon": "person",
+          "action": "navigate",
+          "route": "/profile",
+          "expectedBehavior": "navigate:/profile"
+        },
+        {
+          "kind": "button",
+          "label": "Clinic Administrator",
+          "icon": null,
+          "action": "click-action",
+          "expectedBehavior": "produce visible DOM/state/URL feedback; never empty onClick"
+        },
+        {
+          "kind": "input",
+          "label": "Search patient...",
+          "type": "text",
+          "placeholder": "Search patient...",
+          "expectedBehavior": "controlled value with onChange; validation if required by PRD"
+        }
+      ],
+      "tabBar": [
+        {
+          "kind": "button",
+          "label": "ClinicFlow Lite City Central Branch",
+          "icon": null,
+          "active": true
+        },
+        {
+          "kind": "button",
+          "label": "Create Appointment",
+          "icon": "add",
+          "active": true
+        },
+        {
+          "kind": "link",
+          "label": "Patient Operations",
+          "icon": "person_search",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Queue",
+          "icon": "format_list_numbered",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "Insights",
+          "icon": "analytics",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "link",
+          "label": "settings",
+          "icon": "settings",
+          "route": "#",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "person",
+          "icon": "person",
+          "active": false
+        },
+        {
+          "kind": "button",
+          "label": "Clinic Administrator",
+          "icon": null,
+          "active": false
+        }
+      ],
+      "title": "Queue and Status Management - ClinicFlow Lite"
+    }
+  }
+}

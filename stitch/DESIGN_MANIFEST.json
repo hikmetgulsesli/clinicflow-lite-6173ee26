@@ -1,0 +1,68 @@
+[
+  {
+    "screenId": "edea961bc55a4029824997fc659d179a",
+    "title": "Patient Editor - ClinicFlow Lite",
+    "htmlFile": "edea961bc55a4029824997fc659d179a.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzI5YzRjYmI2NDczZDQwNDNiYzdmMGIzNDZkZTk0N2MyEgsSBxCN19Wi9xcYAZIBJAoKcHJvamVjdF9pZBIWQhQxMTAyNTc4NzA0ODc3NTU3MjY2MA&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/clinicflow-lite-6173ee26/stitch/edea961bc55a4029824997fc659d179a.html",
+    "surfaceIds": [
+      "SURF_PATIENT_EDITOR"
+    ]
+  },
+  {
+    "screenId": "ac1496e2de6b4b8d93c055084cbef725",
+    "title": "Patient Operations - ClinicFlow Lite",
+    "htmlFile": "ac1496e2de6b4b8d93c055084cbef725.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzI0NThiZTZkMjA3MzQ2YWNhNDlhYzAyYTc3NWM5NmM5EgsSBxCN19Wi9xcYAZIBJAoKcHJvamVjdF9pZBIWQhQxMTAyNTc4NzA0ODc3NTU3MjY2MA&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/clinicflow-lite-6173ee26/stitch/ac1496e2de6b4b8d93c055084cbef725.html",
+    "surfaceIds": [
+      "SURF_PATIENT_OPERATIONS"
+    ]
+  },
+  {
+    "screenId": "a389196c06304be58249b4ddb3b584dd",
+    "title": "Insights - ClinicFlow Lite",
+    "htmlFile": "a389196c06304be58249b4ddb3b584dd.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzAwZTVkZjhiZTcyZDRkYjJhNWM4Yjc5YzY2ZWExZTI3EgsSBxCN19Wi9xcYAZIBJAoKcHJvamVjdF9pZBIWQhQxMTAyNTc4NzA0ODc3NTU3MjY2MA&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/clinicflow-lite-6173ee26/stitch/a389196c06304be58249b4ddb3b584dd.html",
+    "surfaceIds": [
+      "SURF_INSIGHTS"
+    ]
+  },
+  {
+    "screenId": "ef6d8a8009d34184ac69e723a28e76c5",
+    "title": "Queue and Status Management - ClinicFlow Lite",
+    "htmlFile": "ef6d8a8009d34184ac69e723a28e76c5.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sXzlkMmI5YzIxMzg5MjQwNTdiNDFhNGU0OTAxMWQxMTQ2EgsSBxCN19Wi9xcYAZIBJAoKcHJvamVjdF9pZBIWQhQxMTAyNTc4NzA0ODc3NTU3MjY2MA&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/clinicflow-lite-6173ee26/stitch/ef6d8a8009d34184ac69e723a28e76c5.html",
+    "surfaceIds": [
+      "SURF_QUEUE_AND_STATUS_MANAGEMENT"
+    ]
+  },
+  {
+    "screenId": "09dfdaa7f1834f9db4b9aaccad63c2d3",
+    "title": "Settings and Preferences - ClinicFlow Lite",
+    "htmlFile": "09dfdaa7f1834f9db4b9aaccad63c2d3.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sX2I2OTYwNTJkNjllNDQyNjY5MGY5OGRiZjA2MjM2YmM5EgsSBxCN19Wi9xcYAZIBJAoKcHJvamVjdF9pZBIWQhQxMTAyNTc4NzA0ODc3NTU3MjY2MA&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/clinicflow-lite-6173ee26/stitch/09dfdaa7f1834f9db4b9aaccad63c2d3.html",
+    "surfaceIds": [
+      "SURF_SETTINGS_AND_PREFERENCES"
+    ]
+  },
+  {
+    "screenId": "c995f9bc64ea44429aca6ec8658ff3af",
+    "title": "Empty and Error Recovery - ClinicFlow Lite",
+    "htmlFile": "c995f9bc64ea44429aca6ec8658ff3af.html",
+    "deviceType": "DESKTOP",
+    "htmlUrl": "https://contribution.usercontent.google.com/download?c=CgthaWRhX2NvZGVmeBJ8Eh1hcHBfY29tcGFuaW9uX2dlbmVyYXRlZF9maWxlcxpbCiVodG1sX2UxZWMxZGM3ZDcyNDRmZWM4OTIwYWIyNDgwZGVjNTJlEgsSBxCN19Wi9xcYAZIBJAoKcHJvamVjdF9pZBIWQhQxMTAyNTc4NzA0ODc3NTU3MjY2MA&filename=&opi=96797242",
+    "localHtml": "/Users/setrox/projects/clinicflow-lite-6173ee26/stitch/c995f9bc64ea44429aca6ec8658ff3af.html",
+    "surfaceIds": [
+      "SURF_EMPTY_AND_ERROR_RECOVERY"
+    ]
+  }
+]

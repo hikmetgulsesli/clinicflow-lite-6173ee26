@@ -1,0 +1,56 @@
+[
+  {
+    "screenId": "edea961bc55a4029824997fc659d179a",
+    "name": "Patient Editor - ClinicFlow Lite",
+    "type": "form",
+    "description": "Patient Editor - ClinicFlow Lite screen",
+    "surfaceIds": [
+      "SURF_PATIENT_EDITOR"
+    ]
+  },
+  {
+    "screenId": "ac1496e2de6b4b8d93c055084cbef725",
+    "name": "Patient Operations - ClinicFlow Lite",
+    "type": "app-screen",
+    "description": "Patient Operations - ClinicFlow Lite screen",
+    "surfaceIds": [
+      "SURF_PATIENT_OPERATIONS"
+    ]
+  },
+  {
+    "screenId": "a389196c06304be58249b4ddb3b584dd",
+    "name": "Insights - ClinicFlow Lite",
+    "type": "app-screen",
+    "description": "Insights - ClinicFlow Lite screen",
+    "surfaceIds": [
+      "SURF_INSIGHTS"
+    ]
+  },
+  {
+    "screenId": "ef6d8a8009d34184ac69e723a28e76c5",
+    "name": "Queue and Status Management - ClinicFlow Lite",
+    "type": "app-screen",
+    "description": "Queue and Status Management - ClinicFlow Lite screen",
+    "surfaceIds": [
+      "SURF_QUEUE_AND_STATUS_MANAGEMENT"
+    ]
+  },
+  {
+    "screenId": "09dfdaa7f1834f9db4b9aaccad63c2d3",
+    "name": "Settings and Preferences - ClinicFlow Lite",
+    "type": "settings",
+    "description": "Settings and Preferences - ClinicFlow Lite screen",
+    "surfaceIds": [
+      "SURF_SETTINGS_AND_PREFERENCES"
+    ]
+  },
+  {
+    "screenId": "c995f9bc64ea44429aca6ec8658ff3af",
+    "name": "Empty and Error Recovery - ClinicFlow Lite",
+    "type": "error",
+    "description": "Empty and Error Recovery - ClinicFlow Lite screen",
+    "surfaceIds": [
+      "SURF_EMPTY_AND_ERROR_RECOVERY"
+    ]
+  }
+]

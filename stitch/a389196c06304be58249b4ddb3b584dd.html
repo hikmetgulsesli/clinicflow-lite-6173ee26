@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ClinicFlow Lite - Insights</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom scrollbar for data density areas */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #c3c6d4; /* outline-variant */
+            border-radius: 4px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#360f00",
+                      "primary": "#003178",
+                      "surface-container": "#ededf5",
+                      "inverse-surface": "#2e3036",
+                      "surface-bright": "#faf8ff",
+                      "on-surface": "#1a1b21",
+                      "surface-tint": "#2b5bb5",
+                      "surface-container-highest": "#e2e2ea",
+                      "secondary-fixed-dim": "#88d982",
+                      "background": "#faf8ff",
+                      "on-secondary-fixed-variant": "#005312",
+                      "primary-fixed-dim": "#b0c6ff",
+                      "inverse-primary": "#b0c6ff",
+                      "on-primary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#a0f399",
+                      "on-surface-variant": "#434652",
+                      "on-primary-fixed": "#001945",
+                      "tertiary-fixed-dim": "#ffb596",
+                      "secondary-fixed": "#a3f69c",
+                      "on-primary-fixed-variant": "#00429c",
+                      "primary-container": "#0d47a1",
+                      "secondary": "#1b6d24",
+                      "surface-dim": "#d9d9e1",
+                      "tertiary-container": "#853100",
+                      "tertiary-fixed": "#ffdbcd",
+                      "tertiary": "#602100",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#e8e7f0",
+                      "primary-fixed": "#d9e2ff",
+                      "surface-container-low": "#f3f3fb",
+                      "on-background": "#1a1b21",
+                      "on-primary-container": "#a1bbff",
+                      "on-error-container": "#93000a",
+                      "on-secondary-container": "#217128",
+                      "inverse-on-surface": "#f0f0f8",
+                      "surface": "#faf8ff",
+                      "outline": "#737783",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#002204",
+                      "on-tertiary-container": "#ffa781",
+                      "outline-variant": "#c3c6d4",
+                      "surface-variant": "#e2e2ea"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "base": "4px",
+                      "margin": "16px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "gutter": "12px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter", "sans-serif"],
+                      "label-sm": ["Inter", "sans-serif"],
+                      "headline-lg": ["Inter", "sans-serif"],
+                      "data-mono": ["Inter", "monospace"],
+                      "label-md": ["Inter", "sans-serif"],
+                      "headline-md": ["Inter", "sans-serif"],
+                      "body-md": ["Inter", "sans-serif"],
+                      "body-sm": ["Inter", "sans-serif"],
+                      "headline-sm": ["Inter", "sans-serif"]
+              },
+              "fontSize": {
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "data-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "headline-sm": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md flex h-screen overflow-hidden antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<aside class="fixed left-0 top-0 h-full flex flex-col p-md gap-sm bg-surface-container-low border-r border-outline-variant w-64 z-20 hidden md:flex">
+<div class="flex items-center gap-sm px-sm py-sm mb-md">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[20px] fill-icon">medical_services</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">ClinicFlow Lite</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">City Central Branch</p>
+</div>
+</div>
+<nav class="flex-1 space-y-xs">
+<a class="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">person_search</span>
+                Patient Operations
+            </a>
+<a class="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">format_list_numbered</span>
+                Queue
+            </a>
+<a class="flex items-center gap-md px-sm py-2 rounded-lg bg-primary-container text-on-primary-container font-semibold font-label-md text-label-md relative overflow-hidden group" href="#">
+<div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-[20px] fill-icon">analytics</span>
+                Insights
+            </a>
+<a class="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-md">
+<button class="w-full flex items-center justify-center gap-sm bg-primary text-on-primary py-2 px-md rounded font-label-md text-label-md hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Create Appointment
+            </button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 md:ml-64 bg-background">
+<header class="flex justify-between items-center w-full px-lg py-sm h-14 bg-surface border-b border-outline-variant sticky top-0 z-10">
+<div class="flex items-center w-1/3 min-w-[200px]">
+<div class="relative w-full max-w-sm flex items-center">
+<span class="material-symbols-outlined absolute left-2 text-outline text-[18px] pointer-events-none">search</span>
+<input class="w-full h-8 pl-8 pr-sm bg-surface border border-outline-variant rounded font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" placeholder="Search patients, IDs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-low transition-colors relative">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full border border-surface"></span>
+</button>
+<div class="h-4 w-[1px] bg-outline-variant mx-xs"></div>
+<button class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden hover:opacity-80 transition-opacity">
+<img alt="Clinic Administrator" class="w-full h-full object-cover" data-alt="A professional headshot of a female clinic administrator in a well-lit modern medical office, wearing a neat navy blue blazer over a light blue shirt. The background is slightly blurred showing clean white walls and subtle medical equipment. Soft, natural lighting. High quality corporate portrait photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOEI2KeELx2ZUMtUcn_Ktxnp79V6R76TGqv7oNpvE_TRzwQhkmWPtiYyZhDmBe1ck-TFpo56bSsqRaGn4AYf34TzWkTwjsvSsw98dJzk5NTbBsyXp1gikVXTFPSDN8BWspb0b_ga5vEVYHL54D-pt1cSEX0yF5w0cwui-64d_rhSzV5eWu_4eIa4ImYQKr7iOr5xJwA1CN5nYiXy_ep8MLEYQOfQBY1nNHHqhzW60eZ0rnueCydi4VjG1eLbI5IGoiHPBPzviM3EI-"/>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-auto p-margin md:p-lg">
+<div class="max-w-7xl mx-auto space-y-lg">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-md border-b border-outline-variant pb-sm">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Daily Overview</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Real-time metrics for current operational shift.</p>
+</div>
+<div class="flex items-center gap-sm">
+<div class="flex items-center gap-xs px-sm py-1.5 bg-surface-container rounded border border-outline-variant">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">calendar_today</span>
+<span class="font-label-sm text-label-sm text-on-surface">Today, Oct 24</span>
+</div>
+<button class="flex items-center gap-xs px-md py-1.5 border border-primary text-primary rounded font-label-md text-label-md hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[16px]">download</span>
+                            Export Summary
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-sm opacity-10">
+<span class="material-symbols-outlined text-[64px]">groups</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-xs mb-sm">
+<div class="w-6 h-6 rounded bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">person</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Today's Total</h3>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="font-headline-lg text-headline-lg text-on-surface text-[32px]">142</span>
+<span class="font-label-sm text-label-sm text-secondary flex items-center">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> +12%
+                                </span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-1">Patients checked in today.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 p-sm opacity-10">
+<span class="material-symbols-outlined text-[64px]">schedule</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-xs mb-sm">
+<div class="w-6 h-6 rounded bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Avg Wait Time</h3>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="font-headline-lg text-headline-lg text-on-surface text-[32px]">18</span>
+<span class="font-label-md text-label-md text-on-surface-variant">mins</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-1">Target is &lt; 15 mins. Capacity high.</p>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-1 bg-surface-container-highest">
+<div class="h-full bg-error" style="width: 75%;"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 p-sm opacity-10">
+<span class="material-symbols-outlined text-[64px]">meeting_room</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-xs mb-sm">
+<div class="w-6 h-6 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">bed</span>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Room Occupancy</h3>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="font-headline-lg text-headline-lg text-on-surface text-[32px]">8</span>
+<span class="font-label-md text-label-md text-on-surface-variant">/ 10</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-1">Peak expected at 2:00 PM.</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded flex flex-col h-[400px]">
+<div class="px-md py-sm border-b border-outline-variant flex justify-between items-center bg-surface-bright/50 rounded-t">
+<h3 class="font-label-md text-label-md text-on-surface">Patient Volume by Hour</h3>
+<button class="text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+<div class="flex-1 p-md flex flex-col">
+<div class="flex-1 flex items-end gap-1 sm:gap-2 pt-md relative">
+<div class="absolute top-0 left-0 w-full h-full flex flex-col justify-between pointer-events-none pb-6">
+<div class="w-full border-t border-dashed border-outline-variant/50 relative">
+<span class="absolute -left-6 -top-2.5 font-label-sm text-label-sm text-outline text-[10px]">30</span>
+</div>
+<div class="w-full border-t border-dashed border-outline-variant/50 relative">
+<span class="absolute -left-6 -top-2.5 font-label-sm text-label-sm text-outline text-[10px]">15</span>
+</div>
+<div class="w-full border-t border-dashed border-outline-variant/50 relative">
+<span class="absolute -left-6 -top-2.5 font-label-sm text-label-sm text-outline text-[10px]">0</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative z-10">
+<div class="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style="height: 20%;"></div>
+<span class="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">8a</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative z-10">
+<div class="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style="height: 45%;"></div>
+<span class="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">9a</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative z-10">
+<div class="w-full bg-surface-tint rounded-t-sm opacity-80 hover:opacity-100 transition-opacity" style="height: 70%;"></div>
+<span class="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">10a</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative z-10">
+<div class="w-full bg-primary rounded-t-sm transition-opacity" style="height: 95%;"></div>
+<span class="font-label-sm text-label-sm text-on-surface font-bold mt-2 text-[10px] sm:text-[11px]">11a</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative z-10">
+<div class="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style="height: 60%;"></div>
+<span class="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">12p</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative z-10">
+<div class="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style="height: 40%;"></div>
+<span class="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">1p</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative z-10">
+<div class="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style="height: 85%;"></div>
+<span class="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">2p</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative z-10">
+<div class="w-full bg-surface-tint rounded-t-sm opacity-40 hover:opacity-100 transition-opacity" style="height: 50%;"></div>
+<span class="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">3p</span>
+</div>
+<div class="flex-1 flex flex-col justify-end items-center group relative z-10">
+<div class="w-full bg-surface-tint rounded-t-sm opacity-20 hover:opacity-100 transition-opacity" style="height: 30%;"></div>
+<span class="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">4p</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded flex flex-col h-[400px]">
+<div class="px-md py-sm border-b border-outline-variant bg-surface-bright/50 rounded-t">
+<h3 class="font-label-md text-label-md text-on-surface">Recent Activity</h3>
+</div>
+<div class="flex-1 overflow-auto p-md">
+<div class="relative pl-4 space-y-6 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-surface-container-highest">
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-6 h-6 rounded-full border-2 border-surface bg-secondary-container absolute left-0 -ml-[11px] z-10 text-on-secondary-container">
+<span class="material-symbols-outlined text-[12px]">check</span>
+</div>
+<div class="ml-sm w-full">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-data-mono text-data-mono text-on-surface">JD-492</span>
+<span class="font-label-sm text-label-sm text-outline">Just now</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Discharged</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed-dim/20 text-on-secondary-container font-label-sm text-[10px] border border-secondary-fixed-dim/30">Complete</span>
+</div>
+</div>
+</div>
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-6 h-6 rounded-full border-2 border-surface bg-surface-variant absolute left-0 -ml-[11px] z-10 text-on-surface-variant">
+<span class="material-symbols-outlined text-[12px]">arrow_forward</span>
+</div>
+<div class="ml-sm w-full">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-data-mono text-data-mono text-on-surface">MK-118</span>
+<span class="font-label-sm text-label-sm text-outline">4m ago</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Triaged → Room 3</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-variant text-on-surface font-label-sm text-[10px]">In Progress</span>
+</div>
+</div>
+</div>
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-6 h-6 rounded-full border-2 border-surface bg-error-container absolute left-0 -ml-[11px] z-10 text-on-error-container">
+<span class="material-symbols-outlined text-[12px]">priority_high</span>
+</div>
+<div class="ml-sm w-full">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-data-mono text-data-mono text-on-surface">AL-902</span>
+<span class="font-label-sm text-label-sm text-outline">12m ago</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Status Escalation</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-[10px] border border-error/20">Urgent</span>
+</div>
+</div>
+</div>
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-6 h-6 rounded-full border-2 border-surface bg-surface-variant absolute left-0 -ml-[11px] z-10 text-on-surface-variant">
+<span class="material-symbols-outlined text-[12px]">how_to_reg</span>
+</div>
+<div class="ml-sm w-full">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-data-mono text-data-mono text-on-surface">RT-055</span>
+<span class="font-label-sm text-label-sm text-outline">18m ago</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Checked In</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-variant text-on-surface font-label-sm text-[10px]">Pending</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - ClinicFlow Lite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#360f00",
+                        "primary": "#003178",
+                        "surface-container": "#ededf5",
+                        "inverse-surface": "#2e3036",
+                        "surface-bright": "#faf8ff",
+                        "on-surface": "#1a1b21",
+                        "surface-tint": "#2b5bb5",
+                        "surface-container-highest": "#e2e2ea",
+                        "secondary-fixed-dim": "#88d982",
+                        "background": "#faf8ff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "primary-fixed-dim": "#b0c6ff",
+                        "inverse-primary": "#b0c6ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#a0f399",
+                        "on-surface-variant": "#434652",
+                        "on-primary-fixed": "#001945",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "secondary-fixed": "#a3f69c",
+                        "on-primary-fixed-variant": "#00429c",
+                        "primary-container": "#0d47a1",
+                        "secondary": "#1b6d24",
+                        "surface-dim": "#d9d9e1",
+                        "tertiary-container": "#853100",
+                        "tertiary-fixed": "#ffdbcd",
+                        "tertiary": "#602100",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e8e7f0",
+                        "primary-fixed": "#d9e2ff",
+                        "surface-container-low": "#f3f3fb",
+                        "on-background": "#1a1b21",
+                        "on-primary-container": "#a1bbff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#217128",
+                        "inverse-on-surface": "#f0f0f8",
+                        "surface": "#faf8ff",
+                        "outline": "#737783",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#002204",
+                        "on-tertiary-container": "#ffa781",
+                        "outline-variant": "#c3c6d4",
+                        "surface-variant": "#e2e2ea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "base": "4px",
+                        "margin": "16px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "gutter": "12px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "data-mono": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "data-mono": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-sm": ["16px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- Mobile TopNav (Visible only on mobile) -->
+<header class="md:hidden flex justify-between items-center w-full px-lg py-sm h-14 bg-surface dark:bg-on-surface border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-sm">
+<span class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed-dim font-bold">ClinicFlow Lite</span>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors text-on-surface-variant dark:text-outline-variant cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors text-on-surface-variant dark:text-outline-variant cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Desktop SideNavBar (Hidden on mobile) -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col p-md gap-sm bg-surface-container-low dark:bg-surface-dim border-r border-outline-variant dark:border-outline docked h-full w-64 z-10">
+<div class="mb-lg px-sm">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed-dim">ClinicFlow Lite</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">City Central Branch</p>
+</div>
+<div class="flex flex-col gap-xs flex-grow">
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all cursor-pointer active:scale-95 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+                Patient Operations
+            </a>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all cursor-pointer active:scale-95 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="format_list_numbered">format_list_numbered</span>
+                Queue
+            </a>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all cursor-pointer active:scale-95 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                Insights
+            </a>
+<a class="flex items-center gap-md px-sm py-sm bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container font-semibold rounded-lg transition-all cursor-pointer active:scale-95 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined icon-filled" data-icon="settings">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto">
+<button class="w-full bg-primary text-on-primary rounded-DEFAULT py-sm px-md font-label-md text-label-md hover:opacity-90 transition-opacity">
+                Create Appointment
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow md:ml-64 p-margin md:p-lg lg:p-xl flex flex-col gap-lg bg-background">
+<header class="border-b border-outline-variant pb-md flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Settings &amp; Preferences</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Manage your workspace configuration and notification thresholds.</p>
+</div>
+<div class="hidden sm:flex gap-sm">
+<button class="px-md py-sm rounded-DEFAULT border border-primary text-primary font-label-md text-label-md hover:bg-surface-container transition-colors">
+                    Reset to Defaults
+                </button>
+<button class="px-md py-sm rounded-DEFAULT bg-primary text-on-primary font-label-md text-label-md hover:bg-primary/90 transition-colors">
+                    Save Preferences
+                </button>
+</div>
+</header>
+<div class="flex flex-col lg:flex-row gap-lg">
+<!-- Vertical Tabs -->
+<aside class="w-full lg:w-48 shrink-0">
+<nav class="flex flex-row lg:flex-col gap-xs overflow-x-auto lg:overflow-visible pb-sm lg:pb-0 hide-scrollbar border-b lg:border-b-0 border-outline-variant mb-md lg:mb-0">
+<button class="whitespace-nowrap px-md py-sm text-left font-label-md text-label-md bg-surface-container-low text-primary border-l-2 lg:border-l-4 border-primary rounded-r-DEFAULT lg:rounded-none lg:rounded-r-DEFAULT bg-primary-container/10">
+                        Workflow
+                    </button>
+<button class="whitespace-nowrap px-md py-sm text-left font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-lowest transition-colors border-l-2 lg:border-l-4 border-transparent hover:border-outline-variant lg:rounded-r-DEFAULT">
+                        Notifications
+                    </button>
+<button class="whitespace-nowrap px-md py-sm text-left font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-lowest transition-colors border-l-2 lg:border-l-4 border-transparent hover:border-outline-variant lg:rounded-r-DEFAULT">
+                        Display
+                    </button>
+</nav>
+</aside>
+<!-- Settings Form Area -->
+<div class="flex-grow flex flex-col gap-lg max-w-3xl">
+<!-- Section: Dashboard Configuration -->
+<section class="bg-surface border border-outline-variant rounded-DEFAULT p-md lg:p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Dashboard Configuration</h3>
+<div class="flex flex-col gap-md">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="density">Information Density</label>
+<select class="w-full border border-outline-variant rounded-DEFAULT px-sm py-sm font-body-md text-body-md bg-surface text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="density">
+<option value="compact">Compact (High Density)</option>
+<option selected="" value="standard">Standard</option>
+<option value="comfortable">Comfortable</option>
+</select>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="refresh_rate">Data Refresh Rate</label>
+<select class="w-full border border-outline-variant rounded-DEFAULT px-sm py-sm font-body-md text-body-md bg-surface text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="refresh_rate">
+<option value="realtime">Real-time (WebSocket)</option>
+<option selected="" value="30s">Every 30 seconds</option>
+<option value="60s">Every 60 seconds</option>
+</select>
+</div>
+</div>
+<div class="mt-sm">
+<label class="flex items-center gap-sm cursor-pointer group">
+<input checked="" class="form-checkbox h-4 w-4 text-primary border-outline-variant rounded-sm focus:ring-primary focus:ring-offset-0 bg-surface" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Show critical alerts persistently across all tabs</span>
+</label>
+</div>
+</div>
+</section>
+<!-- Section: Operational Defaults -->
+<section class="bg-surface border border-outline-variant rounded-DEFAULT p-md lg:p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Operational Defaults</h3>
+<div class="flex flex-col gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="default_room">Default Room Assignment</label>
+<div class="flex gap-sm items-center">
+<select class="w-full sm:w-1/2 border border-outline-variant rounded-DEFAULT px-sm py-sm font-body-md text-body-md bg-surface text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" id="default_room">
+<option selected="" value="auto">Auto-assign (Next Available)</option>
+<option value="triage">Triage Room 1</option>
+<option value="exam_a">Exam Room A</option>
+<option value="exam_b">Exam Room B</option>
+</select>
+<span class="text-on-surface-variant text-label-sm ml-sm flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]">info</span> Used for walk-in patients</span>
+</div>
+</div>
+<div class="border-t border-outline-variant my-sm"></div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-sm">Wait Time Alert Thresholds</h4>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-lg mt-xs">
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs block">Warning Threshold (mins)</label>
+<div class="flex items-center gap-sm">
+<input class="w-24 border border-outline-variant rounded-DEFAULT px-sm py-sm font-data-mono text-data-mono bg-surface text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="number" value="15"/>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-secondary h-full" style="width: 25%"></div>
+</div>
+</div>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs block">Urgent Threshold (mins)</label>
+<div class="flex items-center gap-sm">
+<input class="w-24 border border-outline-variant rounded-DEFAULT px-sm py-sm font-data-mono text-data-mono bg-surface text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="number" value="30"/>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden flex">
+<div class="bg-secondary h-full" style="width: 25%"></div>
+<div class="bg-error h-full" style="width: 25%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Mobile Action Buttons -->
+<div class="sm:hidden flex flex-col gap-sm mt-lg">
+<button class="w-full px-md py-sm rounded-DEFAULT bg-primary text-on-primary font-label-md text-label-md hover:bg-primary/90 transition-colors">
+                Save Preferences
+            </button>
+<button class="w-full px-md py-sm rounded-DEFAULT border border-primary text-primary font-label-md text-label-md hover:bg-surface-container transition-colors">
+                Reset to Defaults
+            </button>
+</div>
+</main>
+</body></html>
