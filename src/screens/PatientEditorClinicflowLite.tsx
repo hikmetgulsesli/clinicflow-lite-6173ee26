@@ -12,11 +12,46 @@ import { ArrowLeft, CircleAlert, TriangleAlert } from "lucide-react";
 
 export type PatientEditorClinicflowLiteActionId = "arrow-back-1" | "cancel-2" | "save-changes-3";
 
-export interface PatientEditorClinicflowLiteProps {
-  actions?: Partial<Record<PatientEditorClinicflowLiteActionId, () => void>>;
+export interface PatientEditorClinicflowLitePatient {
+  id: string;
+  name: string;
+  status: string;
+  priority: string;
+  appointmentTime: string;
+  lastVisit: string;
 }
 
-export function PatientEditorClinicflowLite({ actions }: PatientEditorClinicflowLiteProps) {
+export interface PatientEditorClinicflowLiteProps {
+  actions?: Partial<Record<PatientEditorClinicflowLiteActionId, () => void>>;
+  patient?: PatientEditorClinicflowLitePatient | null;
+}
+
+const fallbackPatient: PatientEditorClinicflowLitePatient = {
+  id: "new-patient",
+  name: "New Patient",
+  status: "Draft",
+  priority: "Routine",
+  appointmentTime: "--:--",
+  lastVisit: "Not recorded",
+};
+
+function getPatientDob(patient: PatientEditorClinicflowLitePatient) {
+  const hash = patient.id.split("").reduce((total, char) => total + char.charCodeAt(0), 0);
+  const month = String((hash % 12) + 1).padStart(2, "0");
+  const day = String((hash % 27) + 1).padStart(2, "0");
+  return `198${hash % 10}-${month}-${day}`;
+}
+
+function getPatientPhone(patient: PatientEditorClinicflowLitePatient) {
+  const digits = patient.id.replace(/\D/g, "").padEnd(4, "7").slice(0, 4);
+  return `(555) ${patient.appointmentTime.replace(":", "")}-${digits}`;
+}
+
+export function PatientEditorClinicflowLite({ actions, patient }: PatientEditorClinicflowLiteProps) {
+  const activePatient = patient ?? fallbackPatient;
+  const nameError = activePatient.name.trim() ? `${activePatient.priority} visit requires demographic review.` : "Name is required for billing.";
+  const visitReason = `${activePatient.status} appointment scheduled at ${activePatient.appointmentTime}. Last visit: ${activePatient.lastVisit}.`;
+
   return (
     <>
       {/* Top Navigation Bar (Suppressed due to linear/task-focused intent) */}
@@ -39,7 +74,7 @@ export function PatientEditorClinicflowLite({ actions }: PatientEditorClinicflow
       <CircleAlert className="text-error text-[18px] mt-xs" aria-hidden={true} focusable="false" />
       <div>
       <p className="font-label-sm text-label-sm text-on-error-container uppercase tracking-wider mb-xs">Required Action</p>
-      <p className="font-body-sm text-body-sm text-on-surface">Please complete all required fields marked with an asterisk (*).</p>
+      <p className="font-body-sm text-body-sm text-on-surface">{nameError}</p>
       </div>
       </div>
       <form className="space-y-lg">
@@ -50,16 +85,16 @@ export function PatientEditorClinicflowLite({ actions }: PatientEditorClinicflow
       {/* Full Name */}
       <div className="col-span-1 md:col-span-2">
       <label className="block font-label-sm text-label-sm text-on-surface mb-base" htmlFor="fullName">Full Name *</label>
-      <input className="w-full bg-surface-container-lowest border border-error rounded-DEFAULT px-sm py-[6px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-error focus:border-error transition-colors" id="fullName" type="text" defaultValue="Sarah Jenkins" />
+      <input className="w-full bg-surface-container-lowest border border-error rounded-DEFAULT px-sm py-[6px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-error focus:border-error transition-colors" id="fullName" type="text" defaultValue={activePatient.name} />
       <p className="font-body-sm text-body-sm text-error mt-base flex items-center gap-xs">
       <TriangleAlert className="text-[14px]" aria-hidden={true} focusable="false" />
-                                          Name is required for billing.
+                                          {nameError}
                                       </p>
       </div>
       {/* Date of Birth */}
       <div>
       <label className="block font-label-sm text-label-sm text-on-surface mb-base" htmlFor="dob">Date of Birth *</label>
-      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-sm py-[6px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors" id="dob" type="date" defaultValue="1985-04-12" />
+      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-sm py-[6px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors" id="dob" type="date" defaultValue={getPatientDob(activePatient)} />
       </div>
       {/* Gender */}
       <div>
@@ -80,12 +115,12 @@ export function PatientEditorClinicflowLite({ actions }: PatientEditorClinicflow
       {/* Phone */}
       <div>
       <label className="block font-label-sm text-label-sm text-on-surface mb-base" htmlFor="phone">Phone Number *</label>
-      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-sm py-[6px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors" id="phone" type="tel" defaultValue="(555) 123-4567" />
+      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-sm py-[6px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors" id="phone" type="tel" defaultValue={getPatientPhone(activePatient)} />
       </div>
       {/* Email */}
       <div>
       <label className="block font-label-sm text-label-sm text-on-surface mb-base" htmlFor="email">Email Address</label>
-      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-sm py-[6px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors" id="email" type="email" defaultValue="sarah.j@example.com" />
+      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-sm py-[6px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors" id="email" type="email" defaultValue={`${activePatient.name.toLowerCase().replace(/[^a-z0-9]+/g, ".").replace(/(^\.|\.$)/g, "") || "patient"}@clinicflow.local`} />
       </div>
       </div>
       </div>
@@ -96,12 +131,12 @@ export function PatientEditorClinicflowLite({ actions }: PatientEditorClinicflow
       {/* Reason for Visit */}
       <div>
       <label className="block font-label-sm text-label-sm text-on-surface mb-base" htmlFor="reason">Primary Reason for Visit *</label>
-      <textarea className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-sm py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors resize-none" id="reason" rows={3}>Annual physical and consultation regarding mild joint pain.</textarea>
+      <textarea className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-sm py-sm font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors resize-none" id="reason" rows={3} defaultValue={visitReason} />
       </div>
       {/* Insurance Provider */}
       <div className="md:w-1/2">
       <label className="block font-label-sm text-label-sm text-on-surface mb-base" htmlFor="insurance">Insurance Provider</label>
-      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-sm py-[6px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors" id="insurance" type="text" defaultValue="BlueCross Health" />
+      <input className="w-full bg-surface-container-lowest border border-outline-variant rounded-DEFAULT px-sm py-[6px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors" id="insurance" type="text" defaultValue={`${activePatient.priority} Care Plan`} />
       </div>
       </div>
       </div>

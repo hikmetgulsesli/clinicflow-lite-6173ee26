@@ -79,16 +79,10 @@ export default function App() {
     dispatch({ type: 'recover', state: resetClinicflowLiteState(getBrowserStorage()) });
   };
 
-  const storageMessage =
-    state.storageStatus === 'corrupt'
-      ? (state.lastError ?? 'Saved clinic workspace data could not be recovered.')
-      : state.storageStatus === 'unavailable'
-        ? 'Local storage is unavailable; clinic fixture is active.'
-        : state.storageStatus === 'restored'
-          ? 'Clinic workspace restored from local storage.'
-          : state.storageStatus === 'saved'
-            ? 'Clinic workspace saved locally.'
-            : 'Clinic workspace is ready.';
+  const patientOperationsRecords = state.patients.map((patient) => ({
+    ...patient,
+    stage: state.queue.find((item) => item.patientId === patient.id)?.stage ?? 'waiting',
+  }));
 
   const patientOperationsActions = {
     'create-appointment-1': () => navigate('queue'),
@@ -170,25 +164,20 @@ export default function App() {
       data-storage-status={snapshot.storageStatus}
       className="min-h-screen bg-background text-on-surface"
     >
-      <section
-        aria-live="polite"
-        data-testid="clinicflow-shell-status"
-        className="border-b border-outline-variant bg-surface px-md py-sm text-label-md text-on-surface"
-      >
-        <span data-testid="clinicflow-storage-message">{storageMessage}</span>
-        <span className="mx-xs text-outline">|</span>
-        <span data-testid="clinicflow-active-panel">Panel: {snapshot.activePanel}</span>
-        <span className="mx-xs text-outline">|</span>
-        <span data-testid="clinicflow-queue-count">Queue: {snapshot.counts.queue}</span>
-      </section>
       {state.route === 'patient-operations' ? (
-        <PatientOperationsClinicflowLite actions={patientOperationsActions} />
+        <PatientOperationsClinicflowLite
+          actions={patientOperationsActions}
+          patients={patientOperationsRecords}
+          queueCounts={snapshot.counts}
+          selectedPatientId={state.selectedRecordId}
+        />
       ) : null}
       {state.route === 'queue' ? <QueueAndStatusManagementClinicflowLite actions={queueActions} /> : null}
       {state.route === 'insights' ? <InsightsClinicflowLite actions={insightsActions} /> : null}
       {state.route === 'settings' ? <SettingsAndPreferencesClinicflowLite actions={settingsActions} /> : null}
       {state.route === 'patient-editor' ? (
         <PatientEditorClinicflowLite
+          patient={snapshot.selectedRecord ?? state.patients[0] ?? null}
           actions={{
             'arrow-back-1': () => navigate('patient-operations'),
             'cancel-2': () => navigate('patient-operations'),
