@@ -1,0 +1,937 @@
+[
+  {
+    "screenId": "edea961bc55a4029824997fc659d179a",
+    "screenTitle": "Patient Editor - ClinicFlow Lite",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "button",
+        "label": "arrow_back",
+        "line": 122
+      },
+      {
+        "type": "button",
+        "label": "Cancel",
+        "line": 205
+      },
+      {
+        "type": "button",
+        "label": "Save Changes",
+        "line": 208
+      },
+      {
+        "type": "input",
+        "label": "text",
+        "inputType": "text",
+        "line": 146
+      },
+      {
+        "type": "input",
+        "label": "date",
+        "inputType": "date",
+        "line": 155
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 160
+      },
+      {
+        "type": "input",
+        "label": "tel",
+        "inputType": "tel",
+        "line": 176
+      },
+      {
+        "type": "input",
+        "label": "email",
+        "inputType": "email",
+        "line": 181
+      },
+      {
+        "type": "input",
+        "label": "textarea",
+        "inputType": "textarea",
+        "line": 192
+      },
+      {
+        "type": "input",
+        "label": "text",
+        "inputType": "text",
+        "line": 197
+      },
+      {
+        "type": "form",
+        "label": "form",
+        "line": 138
+      }
+    ],
+    "navigation": [],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "arrow_back",
+        "line": 122
+      },
+      {
+        "type": "button",
+        "label": "Cancel",
+        "line": 205
+      },
+      {
+        "type": "button",
+        "label": "Save Changes",
+        "line": 208
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "text",
+        "inputType": "text",
+        "line": 146
+      },
+      {
+        "type": "input",
+        "label": "date",
+        "inputType": "date",
+        "line": 155
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 160
+      },
+      {
+        "type": "input",
+        "label": "tel",
+        "inputType": "tel",
+        "line": 176
+      },
+      {
+        "type": "input",
+        "label": "email",
+        "inputType": "email",
+        "line": 181
+      },
+      {
+        "type": "input",
+        "label": "textarea",
+        "inputType": "textarea",
+        "line": 192
+      },
+      {
+        "type": "input",
+        "label": "text",
+        "inputType": "text",
+        "line": 197
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 11,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "ac1496e2de6b4b8d93c055084cbef725",
+    "screenTitle": "Patient Operations - ClinicFlow Lite",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "line": 156
+      },
+      {
+        "type": "link",
+        "label": "Queue",
+        "href": "#",
+        "line": 161
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 165
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 169
+      },
+      {
+        "type": "button",
+        "label": "Create Appointment",
+        "line": 176
+      },
+      {
+        "type": "button",
+        "label": "Add Patient",
+        "line": 205
+      },
+      {
+        "type": "button",
+        "label": "more_vert",
+        "line": 268
+      },
+      {
+        "type": "button",
+        "label": "more_vert",
+        "line": 280
+      },
+      {
+        "type": "button",
+        "label": "more_vert",
+        "line": 292
+      },
+      {
+        "type": "button",
+        "label": "more_vert",
+        "line": 304
+      },
+      {
+        "type": "button",
+        "label": "chevron_left",
+        "line": 332
+      },
+      {
+        "type": "button",
+        "label": "chevron_right",
+        "line": 333
+      },
+      {
+        "type": "input",
+        "label": "Search patients...",
+        "inputType": "text",
+        "placeholder": "Search patients...",
+        "line": 202
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "line": 156
+      },
+      {
+        "type": "link",
+        "label": "Queue",
+        "href": "#",
+        "line": 161
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 165
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 169
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Create Appointment",
+        "line": 176
+      },
+      {
+        "type": "button",
+        "label": "Add Patient",
+        "line": 205
+      },
+      {
+        "type": "button",
+        "label": "more_vert",
+        "line": 268
+      },
+      {
+        "type": "button",
+        "label": "more_vert",
+        "line": 280
+      },
+      {
+        "type": "button",
+        "label": "more_vert",
+        "line": 292
+      },
+      {
+        "type": "button",
+        "label": "more_vert",
+        "line": 304
+      },
+      {
+        "type": "button",
+        "label": "chevron_left",
+        "line": 332
+      },
+      {
+        "type": "button",
+        "label": "chevron_right",
+        "line": 333
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Search patients...",
+        "inputType": "text",
+        "placeholder": "Search patients...",
+        "line": 202
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 13,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "a389196c06304be58249b4ddb3b584dd",
+    "screenTitle": "Insights - ClinicFlow Lite",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "line": 152
+      },
+      {
+        "type": "link",
+        "label": "Queue",
+        "href": "#",
+        "line": 156
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 160
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 165
+      },
+      {
+        "type": "button",
+        "label": "Create Appointment",
+        "line": 171
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 186
+      },
+      {
+        "type": "button",
+        "label": "Export Summary",
+        "line": 208
+      },
+      {
+        "type": "button",
+        "label": "more_vert",
+        "line": 279
+      },
+      {
+        "type": "input",
+        "label": "Search patients, IDs...",
+        "inputType": "text",
+        "placeholder": "Search patients, IDs...",
+        "line": 182
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "line": 152
+      },
+      {
+        "type": "link",
+        "label": "Queue",
+        "href": "#",
+        "line": 156
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 160
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 165
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Create Appointment",
+        "line": 171
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 186
+      },
+      {
+        "type": "button",
+        "label": "Export Summary",
+        "line": 208
+      },
+      {
+        "type": "button",
+        "label": "more_vert",
+        "line": 279
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Search patients, IDs...",
+        "inputType": "text",
+        "placeholder": "Search patients, IDs...",
+        "line": 182
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 9,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "ef6d8a8009d34184ac69e723a28e76c5",
+    "screenTitle": "Queue and Status Management - ClinicFlow Lite",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "line": 129
+      },
+      {
+        "type": "link",
+        "label": "Queue",
+        "href": "#",
+        "line": 135
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 141
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 147
+      },
+      {
+        "type": "button",
+        "label": "Create Appointment",
+        "line": 123
+      },
+      {
+        "type": "button",
+        "label": "Filter",
+        "line": 186
+      },
+      {
+        "type": "button",
+        "label": "Move to Triage",
+        "line": 218
+      },
+      {
+        "type": "button",
+        "label": "Move to Triage",
+        "line": 240
+      },
+      {
+        "type": "button",
+        "label": "Move to Triage",
+        "line": 259
+      },
+      {
+        "type": "button",
+        "label": "Move to Room",
+        "line": 290
+      },
+      {
+        "type": "button",
+        "label": "Move to Room",
+        "line": 309
+      },
+      {
+        "type": "button",
+        "label": "Post-Visit",
+        "line": 342
+      },
+      {
+        "type": "input",
+        "label": "Search patient...",
+        "inputType": "text",
+        "placeholder": "Search patient...",
+        "line": 184
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "line": 129
+      },
+      {
+        "type": "link",
+        "label": "Queue",
+        "href": "#",
+        "line": 135
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 141
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 147
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Create Appointment",
+        "line": 123
+      },
+      {
+        "type": "button",
+        "label": "Filter",
+        "line": 186
+      },
+      {
+        "type": "button",
+        "label": "Move to Triage",
+        "line": 218
+      },
+      {
+        "type": "button",
+        "label": "Move to Triage",
+        "line": 240
+      },
+      {
+        "type": "button",
+        "label": "Move to Triage",
+        "line": 259
+      },
+      {
+        "type": "button",
+        "label": "Move to Room",
+        "line": 290
+      },
+      {
+        "type": "button",
+        "label": "Move to Room",
+        "line": 309
+      },
+      {
+        "type": "button",
+        "label": "Post-Visit",
+        "line": 342
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "Search patient...",
+        "inputType": "text",
+        "placeholder": "Search patient...",
+        "line": 184
+      }
+    ],
+    "hardcodedData": [
+      "Emily Davis"
+    ],
+    "totalInteractive": 13,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "09dfdaa7f1834f9db4b9aaccad63c2d3",
+    "screenTitle": "Settings and Preferences - ClinicFlow Lite",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "line": 140
+      },
+      {
+        "type": "link",
+        "label": "Queue",
+        "href": "#",
+        "line": 144
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 148
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 152
+      },
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 125
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 128
+      },
+      {
+        "type": "button",
+        "label": "Create Appointment",
+        "line": 158
+      },
+      {
+        "type": "button",
+        "label": "Reset to Defaults",
+        "line": 171
+      },
+      {
+        "type": "button",
+        "label": "Save Preferences",
+        "line": 174
+      },
+      {
+        "type": "button",
+        "label": "Workflow",
+        "line": 183
+      },
+      {
+        "type": "button",
+        "label": "Notifications",
+        "line": 186
+      },
+      {
+        "type": "button",
+        "label": "Display",
+        "line": 189
+      },
+      {
+        "type": "button",
+        "label": "Save Preferences",
+        "line": 273
+      },
+      {
+        "type": "button",
+        "label": "Reset to Defaults",
+        "line": 276
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 203
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 211
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 220
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 233
+      },
+      {
+        "type": "input",
+        "label": "number",
+        "inputType": "number",
+        "line": 249
+      },
+      {
+        "type": "input",
+        "label": "number",
+        "inputType": "number",
+        "line": 258
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "line": 140
+      },
+      {
+        "type": "link",
+        "label": "Queue",
+        "href": "#",
+        "line": 144
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 148
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 152
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "notifications",
+        "line": 125
+      },
+      {
+        "type": "button",
+        "label": "account_circle",
+        "line": 128
+      },
+      {
+        "type": "button",
+        "label": "Create Appointment",
+        "line": 158
+      },
+      {
+        "type": "button",
+        "label": "Reset to Defaults",
+        "line": 171
+      },
+      {
+        "type": "button",
+        "label": "Save Preferences",
+        "line": 174
+      },
+      {
+        "type": "button",
+        "label": "Workflow",
+        "line": 183
+      },
+      {
+        "type": "button",
+        "label": "Notifications",
+        "line": 186
+      },
+      {
+        "type": "button",
+        "label": "Display",
+        "line": 189
+      },
+      {
+        "type": "button",
+        "label": "Save Preferences",
+        "line": 273
+      },
+      {
+        "type": "button",
+        "label": "Reset to Defaults",
+        "line": 276
+      }
+    ],
+    "inputs": [
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 203
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 211
+      },
+      {
+        "type": "input",
+        "label": "checkbox",
+        "inputType": "checkbox",
+        "line": 220
+      },
+      {
+        "type": "input",
+        "label": "select",
+        "inputType": "select",
+        "line": 233
+      },
+      {
+        "type": "input",
+        "label": "number",
+        "inputType": "number",
+        "line": 249
+      },
+      {
+        "type": "input",
+        "label": "number",
+        "inputType": "number",
+        "line": 258
+      }
+    ],
+    "hardcodedData": [],
+    "totalInteractive": 20,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  },
+  {
+    "screenId": "c995f9bc64ea44429aca6ec8658ff3af",
+    "screenTitle": "Empty and Error Recovery - ClinicFlow Lite",
+    "deviceType": "DESKTOP",
+    "elements": [
+      {
+        "type": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "line": 199
+      },
+      {
+        "type": "link",
+        "label": "Queue",
+        "href": "#",
+        "line": 205
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 211
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 217
+      },
+      {
+        "type": "button",
+        "label": "Create Appointment",
+        "line": 224
+      },
+      {
+        "type": "button",
+        "label": "Empty State",
+        "line": 236
+      },
+      {
+        "type": "button",
+        "label": "Error State",
+        "line": 237
+      },
+      {
+        "type": "button",
+        "label": "Clear Filters",
+        "line": 249
+      },
+      {
+        "type": "button",
+        "label": "Create Patient",
+        "line": 252
+      },
+      {
+        "type": "button",
+        "label": "Retry Connection",
+        "line": 272
+      }
+    ],
+    "navigation": [
+      {
+        "type": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "line": 199
+      },
+      {
+        "type": "link",
+        "label": "Queue",
+        "href": "#",
+        "line": 205
+      },
+      {
+        "type": "link",
+        "label": "Insights",
+        "href": "#",
+        "line": 211
+      },
+      {
+        "type": "link",
+        "label": "settings",
+        "href": "#",
+        "line": 217
+      }
+    ],
+    "buttons": [
+      {
+        "type": "button",
+        "label": "Create Appointment",
+        "line": 224
+      },
+      {
+        "type": "button",
+        "label": "Empty State",
+        "line": 236
+      },
+      {
+        "type": "button",
+        "label": "Error State",
+        "line": 237
+      },
+      {
+        "type": "button",
+        "label": "Clear Filters",
+        "line": 249
+      },
+      {
+        "type": "button",
+        "label": "Create Patient",
+        "line": 252
+      },
+      {
+        "type": "button",
+        "label": "Retry Connection",
+        "line": 272
+      }
+    ],
+    "inputs": [],
+    "hardcodedData": [],
+    "totalInteractive": 10,
+    "requiresRouter": false,
+    "requiresDragDrop": false
+  }
+]

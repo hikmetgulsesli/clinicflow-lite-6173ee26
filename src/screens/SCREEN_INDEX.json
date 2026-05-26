@@ -1,0 +1,448 @@
+[
+  {
+    "screenId": "edea961bc55a4029824997fc659d179a",
+    "title": "Patient Editor - ClinicFlow Lite",
+    "componentName": "PatientEditorClinicflowLite",
+    "file": "src/screens/PatientEditorClinicflowLite.tsx",
+    "buttons": 3,
+    "inputs": 5,
+    "links": 0,
+    "actions": [
+      {
+        "id": "arrow-back-1",
+        "kind": "button",
+        "label": "Arrow Back",
+        "index": 0
+      },
+      {
+        "id": "cancel-2",
+        "kind": "button",
+        "label": "Cancel",
+        "index": 1
+      },
+      {
+        "id": "save-changes-3",
+        "kind": "button",
+        "label": "Save Changes",
+        "index": 2
+      }
+    ]
+  },
+  {
+    "screenId": "ac1496e2de6b4b8d93c055084cbef725",
+    "title": "Patient Operations - ClinicFlow Lite",
+    "componentName": "PatientOperationsClinicflowLite",
+    "file": "src/screens/PatientOperationsClinicflowLite.tsx",
+    "buttons": 8,
+    "inputs": 1,
+    "links": 4,
+    "actions": [
+      {
+        "id": "create-appointment-1",
+        "kind": "button",
+        "label": "Create Appointment",
+        "index": 0
+      },
+      {
+        "id": "add-patient-2",
+        "kind": "button",
+        "label": "Add Patient",
+        "index": 1
+      },
+      {
+        "id": "more-vert-3",
+        "kind": "button",
+        "label": "More Vert",
+        "index": 2
+      },
+      {
+        "id": "more-vert-4",
+        "kind": "button",
+        "label": "More Vert",
+        "index": 3
+      },
+      {
+        "id": "more-vert-5",
+        "kind": "button",
+        "label": "More Vert",
+        "index": 4
+      },
+      {
+        "id": "more-vert-6",
+        "kind": "button",
+        "label": "More Vert",
+        "index": 5
+      },
+      {
+        "id": "chevron-left-7",
+        "kind": "button",
+        "label": "Chevron Left",
+        "index": 6
+      },
+      {
+        "id": "chevron-right-8",
+        "kind": "button",
+        "label": "Chevron Right",
+        "index": 7
+      },
+      {
+        "id": "patient-operations-1",
+        "kind": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "index": 0
+      },
+      {
+        "id": "queue-2",
+        "kind": "link",
+        "label": "Queue",
+        "href": "#",
+        "index": 1
+      },
+      {
+        "id": "insights-3",
+        "kind": "link",
+        "label": "Insights",
+        "href": "#",
+        "index": 2
+      },
+      {
+        "id": "settings-4",
+        "kind": "link",
+        "label": "Settings",
+        "href": "#",
+        "index": 3
+      }
+    ]
+  },
+  {
+    "screenId": "a389196c06304be58249b4ddb3b584dd",
+    "title": "Insights - ClinicFlow Lite",
+    "componentName": "InsightsClinicflowLite",
+    "file": "src/screens/InsightsClinicflowLite.tsx",
+    "buttons": 5,
+    "inputs": 1,
+    "links": 4,
+    "actions": [
+      {
+        "id": "create-appointment-1",
+        "kind": "button",
+        "label": "Create Appointment",
+        "index": 0
+      },
+      {
+        "id": "notifications-2",
+        "kind": "button",
+        "label": "Notifications",
+        "index": 1
+      },
+      {
+        "id": "button-3-3",
+        "kind": "button",
+        "label": "Button 3",
+        "index": 2
+      },
+      {
+        "id": "export-summary-4",
+        "kind": "button",
+        "label": "Export Summary",
+        "index": 3
+      },
+      {
+        "id": "more-vert-5",
+        "kind": "button",
+        "label": "More Vert",
+        "index": 4
+      },
+      {
+        "id": "patient-operations-1",
+        "kind": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "index": 0
+      },
+      {
+        "id": "queue-2",
+        "kind": "link",
+        "label": "Queue",
+        "href": "#",
+        "index": 1
+      },
+      {
+        "id": "insights-3",
+        "kind": "link",
+        "label": "Insights",
+        "href": "#",
+        "index": 2
+      },
+      {
+        "id": "settings-4",
+        "kind": "link",
+        "label": "Settings",
+        "href": "#",
+        "index": 3
+      }
+    ]
+  },
+  {
+    "screenId": "ef6d8a8009d34184ac69e723a28e76c5",
+    "title": "Queue and Status Management - ClinicFlow Lite",
+    "componentName": "QueueAndStatusManagementClinicflowLite",
+    "file": "src/screens/QueueAndStatusManagementClinicflowLite.tsx",
+    "buttons": 8,
+    "inputs": 1,
+    "links": 4,
+    "actions": [
+      {
+        "id": "create-appointment-1",
+        "kind": "button",
+        "label": "Create Appointment",
+        "index": 0
+      },
+      {
+        "id": "filter-2",
+        "kind": "button",
+        "label": "Filter",
+        "index": 1
+      },
+      {
+        "id": "move-to-triage-3",
+        "kind": "button",
+        "label": "Move to Triage",
+        "index": 2
+      },
+      {
+        "id": "move-to-triage-4",
+        "kind": "button",
+        "label": "Move to Triage",
+        "index": 3
+      },
+      {
+        "id": "move-to-triage-5",
+        "kind": "button",
+        "label": "Move to Triage",
+        "index": 4
+      },
+      {
+        "id": "move-to-room-6",
+        "kind": "button",
+        "label": "Move to Room",
+        "index": 5
+      },
+      {
+        "id": "move-to-room-7",
+        "kind": "button",
+        "label": "Move to Room",
+        "index": 6
+      },
+      {
+        "id": "post-visit-8",
+        "kind": "button",
+        "label": "Post-Visit",
+        "index": 7
+      },
+      {
+        "id": "patient-operations-1",
+        "kind": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "index": 0
+      },
+      {
+        "id": "queue-2",
+        "kind": "link",
+        "label": "Queue",
+        "href": "#",
+        "index": 1
+      },
+      {
+        "id": "insights-3",
+        "kind": "link",
+        "label": "Insights",
+        "href": "#",
+        "index": 2
+      },
+      {
+        "id": "settings-4",
+        "kind": "link",
+        "label": "Settings",
+        "href": "#",
+        "index": 3
+      }
+    ]
+  },
+  {
+    "screenId": "09dfdaa7f1834f9db4b9aaccad63c2d3",
+    "title": "Settings and Preferences - ClinicFlow Lite",
+    "componentName": "SettingsAndPreferencesClinicflowLite",
+    "file": "src/screens/SettingsAndPreferencesClinicflowLite.tsx",
+    "buttons": 10,
+    "inputs": 3,
+    "links": 4,
+    "actions": [
+      {
+        "id": "notifications-1",
+        "kind": "button",
+        "label": "Notifications",
+        "index": 0
+      },
+      {
+        "id": "account-circle-2",
+        "kind": "button",
+        "label": "Account Circle",
+        "index": 1
+      },
+      {
+        "id": "create-appointment-3",
+        "kind": "button",
+        "label": "Create Appointment",
+        "index": 2
+      },
+      {
+        "id": "reset-to-defaults-4",
+        "kind": "button",
+        "label": "Reset to Defaults",
+        "index": 3
+      },
+      {
+        "id": "save-preferences-5",
+        "kind": "button",
+        "label": "Save Preferences",
+        "index": 4
+      },
+      {
+        "id": "workflow-6",
+        "kind": "button",
+        "label": "Workflow",
+        "index": 5
+      },
+      {
+        "id": "notifications-7",
+        "kind": "button",
+        "label": "Notifications",
+        "index": 6
+      },
+      {
+        "id": "display-8",
+        "kind": "button",
+        "label": "Display",
+        "index": 7
+      },
+      {
+        "id": "save-preferences-9",
+        "kind": "button",
+        "label": "Save Preferences",
+        "index": 8
+      },
+      {
+        "id": "reset-to-defaults-10",
+        "kind": "button",
+        "label": "Reset to Defaults",
+        "index": 9
+      },
+      {
+        "id": "patient-operations-1",
+        "kind": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "index": 0
+      },
+      {
+        "id": "queue-2",
+        "kind": "link",
+        "label": "Queue",
+        "href": "#",
+        "index": 1
+      },
+      {
+        "id": "insights-3",
+        "kind": "link",
+        "label": "Insights",
+        "href": "#",
+        "index": 2
+      },
+      {
+        "id": "settings-4",
+        "kind": "link",
+        "label": "Settings",
+        "href": "#",
+        "index": 3
+      }
+    ]
+  },
+  {
+    "screenId": "c995f9bc64ea44429aca6ec8658ff3af",
+    "title": "Empty and Error Recovery - ClinicFlow Lite",
+    "componentName": "EmptyAndErrorRecoveryClinicflowLite",
+    "file": "src/screens/EmptyAndErrorRecoveryClinicflowLite.tsx",
+    "buttons": 6,
+    "inputs": 0,
+    "links": 4,
+    "actions": [
+      {
+        "id": "create-appointment-1",
+        "kind": "button",
+        "label": "Create Appointment",
+        "index": 0
+      },
+      {
+        "id": "empty-state-2",
+        "kind": "button",
+        "label": "Empty State",
+        "index": 1
+      },
+      {
+        "id": "error-state-3",
+        "kind": "button",
+        "label": "Error State",
+        "index": 2
+      },
+      {
+        "id": "clear-filters-4",
+        "kind": "button",
+        "label": "Clear Filters",
+        "index": 3
+      },
+      {
+        "id": "create-patient-5",
+        "kind": "button",
+        "label": "Create Patient",
+        "index": 4
+      },
+      {
+        "id": "retry-connection-6",
+        "kind": "button",
+        "label": "Retry Connection",
+        "index": 5
+      },
+      {
+        "id": "patient-operations-1",
+        "kind": "link",
+        "label": "Patient Operations",
+        "href": "#",
+        "index": 0
+      },
+      {
+        "id": "queue-2",
+        "kind": "link",
+        "label": "Queue",
+        "href": "#",
+        "index": 1
+      },
+      {
+        "id": "insights-3",
+        "kind": "link",
+        "label": "Insights",
+        "href": "#",
+        "index": 2
+      },
+      {
+        "id": "settings-4",
+        "kind": "link",
+        "label": "Settings",
+        "href": "#",
+        "index": 3
+      }
+    ]
+  }
+]
