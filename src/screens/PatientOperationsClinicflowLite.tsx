@@ -12,11 +12,81 @@ import { Armchair, BarChart3, ChevronLeft, ChevronRight, EllipsisVertical, Heart
 
 export type PatientOperationsClinicflowLiteActionId = "create-appointment-1" | "add-patient-2" | "more-vert-3" | "more-vert-4" | "more-vert-5" | "more-vert-6" | "chevron-left-7" | "chevron-right-8" | "patient-operations-1" | "queue-2" | "insights-3" | "settings-4";
 
-export interface PatientOperationsClinicflowLiteProps {
-  actions?: Partial<Record<PatientOperationsClinicflowLiteActionId, () => void>>;
+export interface PatientOperationsClinicflowLiteRecord {
+  id: string;
+  name: string;
+  status: string;
+  priority: string;
+  appointmentTime: string;
+  lastVisit: string;
+  stage: string;
 }
 
-export function PatientOperationsClinicflowLite({ actions }: PatientOperationsClinicflowLiteProps) {
+export interface PatientOperationsClinicflowLiteQueueCounts {
+  patients: number;
+  queue: number;
+  waiting: number;
+  triage: number;
+  room: number;
+  postVisit: number;
+}
+
+export interface PatientOperationsClinicflowLiteProps {
+  actions?: Partial<Record<PatientOperationsClinicflowLiteActionId, () => void>>;
+  patients?: PatientOperationsClinicflowLiteRecord[];
+  queueCounts?: PatientOperationsClinicflowLiteQueueCounts;
+  selectedPatientId?: string | null;
+}
+
+const fallbackPatients: PatientOperationsClinicflowLiteRecord[] = [
+  {
+    id: "fallback-1",
+    name: "No active patient",
+    status: "Waiting",
+    priority: "Routine",
+    appointmentTime: "--:--",
+    lastVisit: "Not recorded",
+    stage: "waiting",
+  },
+];
+
+const rowActionIds: PatientOperationsClinicflowLiteActionId[] = ["more-vert-3", "more-vert-4", "more-vert-5", "more-vert-6"];
+
+function getStageLocation(stage: string) {
+  if (stage === "triage") return "Triage Bay 1";
+  if (stage === "room") return "Exam Room A";
+  if (stage === "post-visit") return "Checkout Desk";
+  return "Main Lobby";
+}
+
+function getNextAction(patient: PatientOperationsClinicflowLiteRecord) {
+  if (patient.stage === "triage") return `${patient.priority} triage review`;
+  if (patient.stage === "room") return `${patient.status}, awaiting clinician`;
+  if (patient.stage === "post-visit") return "Post-visit summary due";
+  return `${patient.appointmentTime} intake check-in`;
+}
+
+function getStatusTone(patient: PatientOperationsClinicflowLiteRecord) {
+  if (patient.priority.toLowerCase().includes("urgent") || patient.stage === "triage") {
+    return "bg-error-container text-on-error-container";
+  }
+  if (patient.stage === "room") {
+    return "bg-secondary-container text-on-secondary-container";
+  }
+  return "bg-surface-variant text-on-surface-variant";
+}
+
+export function PatientOperationsClinicflowLite({ actions, patients, queueCounts, selectedPatientId }: PatientOperationsClinicflowLiteProps) {
+  const visiblePatients = (patients && patients.length > 0 ? patients : fallbackPatients).slice(0, 4);
+  const counts = queueCounts ?? {
+    patients: visiblePatients.length,
+    queue: visiblePatients.length,
+    waiting: visiblePatients.filter((patient) => patient.stage === "waiting").length,
+    triage: visiblePatients.filter((patient) => patient.stage === "triage").length,
+    room: visiblePatients.filter((patient) => patient.stage === "room").length,
+    postVisit: visiblePatients.filter((patient) => patient.stage === "post-visit").length,
+  };
+
   return (
     <>
       {/* SideNavBar (Shared Component JSON) */}
@@ -96,7 +166,7 @@ export function PatientOperationsClinicflowLite({ actions }: PatientOperationsCl
       <div className="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex items-center justify-between">
       <div>
       <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Waiting Room</p>
-      <p className="font-headline-lg text-headline-lg text-on-surface mt-1">12</p>
+      <p className="font-headline-lg text-headline-lg text-on-surface mt-1">{counts.waiting}</p>
       </div>
       <div className="w-10 h-10 rounded bg-surface-container-low flex items-center justify-center">
       <Armchair className="text-outline" aria-hidden={true} focusable="false" />
@@ -106,7 +176,7 @@ export function PatientOperationsClinicflowLite({ actions }: PatientOperationsCl
       <div className="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex items-center justify-between">
       <div>
       <p className="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">In Progress</p>
-      <p className="font-headline-lg text-headline-lg text-on-surface mt-1">8</p>
+      <p className="font-headline-lg text-headline-lg text-on-surface mt-1">{counts.triage + counts.room}</p>
       </div>
       <div className="w-10 h-10 rounded bg-primary-container flex items-center justify-center">
       <HeartPulse className="text-on-primary-container" aria-hidden={true} focusable="false" />
@@ -116,7 +186,7 @@ export function PatientOperationsClinicflowLite({ actions }: PatientOperationsCl
       <div className="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex items-center justify-between border-l-4 border-l-error">
       <div>
       <p className="font-label-sm text-label-sm text-error uppercase tracking-wider">Urgent Triage</p>
-      <p className="font-headline-lg text-headline-lg text-error mt-1">2</p>
+      <p className="font-headline-lg text-headline-lg text-error mt-1">{counts.triage}</p>
       </div>
       <div className="w-10 h-10 rounded bg-error-container flex items-center justify-center">
       <TriangleAlert className="text-on-error-container icon-fill" aria-hidden={true} focusable="false" />
@@ -137,78 +207,28 @@ export function PatientOperationsClinicflowLite({ actions }: PatientOperationsCl
       </tr>
       </thead>
       <tbody className="divide-y divide-outline-variant">
-      {/* Row 1: Urgent */}
-      <tr className="hover:bg-surface transition-colors h-[40px]">
-      <td className="px-md py-xs font-data-mono text-data-mono text-on-surface font-semibold">Doe, Jonathan</td>
+      {visiblePatients.map((patient, index) => {
+      const actionId = rowActionIds[index];
+      return (
+      <tr className="hover:bg-surface transition-colors h-[40px]" key={patient.id} data-selected={patient.id === selectedPatientId}>
+      <td className="px-md py-xs font-data-mono text-data-mono text-on-surface font-semibold">{patient.name}</td>
       <td className="px-md py-xs">
-      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">Urgent</span>
+      <span className={`inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-label-sm ${getStatusTone(patient)}`}>{patient.status}</span>
       </td>
-      <td className="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Triage Bay 1</td>
-      <td className="px-md py-xs font-body-sm text-body-sm text-on-surface">Physician Consult Required</td>
+      <td className="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">{getStageLocation(patient.stage)}</td>
+      <td className="px-md py-xs font-body-sm text-body-sm text-on-surface">{getNextAction(patient)}</td>
       <td className="px-md py-xs text-center">
-      <button className="text-outline hover:text-on-surface transition-colors" type="button" aria-label="More Vert" data-action-id="more-vert-3" onClick={actions?.["more-vert-3"]}><EllipsisVertical className="text-[18px]" aria-hidden={true} focusable="false" /></button>
+      {actionId ? <button className="text-outline hover:text-on-surface transition-colors" type="button" aria-label={`Open ${patient.name}`} data-action-id={actionId} onClick={actions?.[actionId]}><EllipsisVertical className="text-[18px]" aria-hidden={true} focusable="false" /></button> : null}
       </td>
       </tr>
-      {/* Row 2: Ready */}
-      <tr className="hover:bg-surface transition-colors h-[40px]">
-      <td className="px-md py-xs font-data-mono text-data-mono text-on-surface font-semibold">Smith, Sarah</td>
-      <td className="px-md py-xs">
-      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Ready</span>
-      </td>
-      <td className="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Exam Room A</td>
-      <td className="px-md py-xs font-body-sm text-body-sm text-on-surface">Vitals Complete, Await MD</td>
-      <td className="px-md py-xs text-center">
-      <button className="text-outline hover:text-on-surface transition-colors" type="button" aria-label="More Vert" data-action-id="more-vert-4" onClick={actions?.["more-vert-4"]}><EllipsisVertical className="text-[18px]" aria-hidden={true} focusable="false" /></button>
-      </td>
-      </tr>
-      {/* Row 3: Pending */}
-      <tr className="hover:bg-surface transition-colors h-[40px]">
-      <td className="px-md py-xs font-data-mono text-data-mono text-on-surface font-semibold">Alvarez, Maria</td>
-      <td className="px-md py-xs">
-      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-variant text-on-surface-variant font-label-sm text-label-sm">Waiting</span>
-      </td>
-      <td className="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Main Lobby</td>
-      <td className="px-md py-xs font-body-sm text-body-sm text-on-surface">Intake Forms Pending</td>
-      <td className="px-md py-xs text-center">
-      <button className="text-outline hover:text-on-surface transition-colors" type="button" aria-label="More Vert" data-action-id="more-vert-5" onClick={actions?.["more-vert-5"]}><EllipsisVertical className="text-[18px]" aria-hidden={true} focusable="false" /></button>
-      </td>
-      </tr>
-      {/* Row 4: Ready */}
-      <tr className="hover:bg-surface transition-colors h-[40px]">
-      <td className="px-md py-xs font-data-mono text-data-mono text-on-surface font-semibold">Chen, Wei</td>
-      <td className="px-md py-xs">
-      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">Ready</span>
-      </td>
-      <td className="px-md py-xs font-body-sm text-body-sm text-on-surface-variant">Lab Area</td>
-      <td className="px-md py-xs font-body-sm text-body-sm text-on-surface">Blood Draw Ordered</td>
-      <td className="px-md py-xs text-center">
-      <button className="text-outline hover:text-on-surface transition-colors" type="button" aria-label="More Vert" data-action-id="more-vert-6" onClick={actions?.["more-vert-6"]}><EllipsisVertical className="text-[18px]" aria-hidden={true} focusable="false" /></button>
-      </td>
-      </tr>
-      {/* Skeleton Loading State (Hint) */}
-      <tr className="animate-pulse h-[40px] opacity-60">
-      <td className="px-md py-xs">
-      <div className="h-4 bg-surface-variant rounded w-32"></div>
-      </td>
-      <td className="px-md py-xs">
-      <div className="h-5 bg-surface-variant rounded-full w-16"></div>
-      </td>
-      <td className="px-md py-xs">
-      <div className="h-4 bg-surface-variant rounded w-24"></div>
-      </td>
-      <td className="px-md py-xs">
-      <div className="h-4 bg-surface-variant rounded w-48"></div>
-      </td>
-      <td className="px-md py-xs text-center">
-      <div className="h-4 w-4 bg-surface-variant rounded mx-auto"></div>
-      </td>
-      </tr>
+      );
+      })}
       </tbody>
       </table>
       </div>
       {/* Table Footer / Pagination Minimal */}
       <div className="border-t border-outline-variant bg-surface-container-lowest px-md py-sm flex justify-between items-center text-on-surface-variant font-label-sm text-label-sm">
-      <span>Showing 1-4 of 24 patients</span>
+      <span>Showing {visiblePatients.length === 0 ? "0" : "1"}-{visiblePatients.length} of {counts.patients} patients</span>
       <div className="flex gap-sm">
       <button className="text-outline hover:text-on-surface disabled:opacity-50" disabled={true} type="button" aria-label="Chevron Left" data-action-id="chevron-left-7" onClick={actions?.["chevron-left-7"]}><ChevronLeft className="text-[18px]" aria-hidden={true} focusable="false" /></button>
       <button className="text-outline hover:text-on-surface" type="button" aria-label="Chevron Right" data-action-id="chevron-right-8" onClick={actions?.["chevron-right-8"]}><ChevronRight className="text-[18px]" aria-hidden={true} focusable="false" /></button>
