@@ -111,10 +111,7 @@ export default function App() {
 
   const insightsActions = {
     'create-appointment-1': () => navigate('queue'),
-    'notifications-2': () => {
-      window.location.hash = '/notifications';
-      navigate('settings');
-    },
+    'notifications-2': () => navigate('settings'),
     'button-3-3': () => navigate('insights'),
     'export-summary-4': () => dispatch({ type: 'set-storage-status', status: 'saved' }),
     'more-vert-5': () => navigate('patient-operations'),
@@ -165,8 +162,12 @@ export default function App() {
       {state.route === 'patient-operations' ? (
         <PatientOperationsClinicflowLite actions={patientOperationsActions} />
       ) : null}
-      {state.route === 'queue' ? <QueueAndStatusManagementClinicflowLite actions={queueActions} /> : null}
-      {state.route === 'insights' ? <InsightsClinicflowLite actions={insightsActions} /> : null}
+      {state.route === 'queue' ? (
+        <QueueAndStatusManagementClinicflowLite actions={queueActions} patients={state.patients} queue={state.queue} />
+      ) : null}
+      {state.route === 'insights' ? (
+        <InsightsClinicflowLite actions={insightsActions} patients={state.patients} queue={state.queue} snapshot={snapshot} />
+      ) : null}
       {state.route === 'settings' ? <SettingsAndPreferencesClinicflowLite actions={settingsActions} /> : null}
       {state.route === 'patient-editor' ? (
         <PatientEditorClinicflowLite

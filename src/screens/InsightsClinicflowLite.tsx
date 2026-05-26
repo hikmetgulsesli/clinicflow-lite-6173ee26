@@ -9,17 +9,31 @@
 
 import { useState } from "react";
 import { ArrowRight, BadgeAlert, BarChart3, Bed, Bell, BriefcaseMedical, CalendarDays, Check, Clock, DoorOpen, Download, EllipsisVertical, ListOrdered, Plus, Search, Settings, Timer, TrendingUp, User, UserCheck, UserSearch, UsersRound } from "lucide-react";
+import type { ClinicflowLitePatient, ClinicflowLiteQueueItem, ClinicflowLiteSnapshot } from "../features/clinicflow-lite/clinicflow-lite.store";
 
 
 export type InsightsClinicflowLiteActionId = "create-appointment-1" | "notifications-2" | "button-3-3" | "export-summary-4" | "more-vert-5" | "patient-operations-1" | "queue-2" | "insights-3" | "settings-4";
 
 export interface InsightsClinicflowLiteProps {
   actions?: Partial<Record<InsightsClinicflowLiteActionId, () => void>>;
+  patients?: ClinicflowLitePatient[];
+  queue?: ClinicflowLiteQueueItem[];
+  snapshot?: ClinicflowLiteSnapshot;
 }
 
-export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps) {
+export function InsightsClinicflowLite({ actions, patients = [], queue = [], snapshot }: InsightsClinicflowLiteProps) {
   const [searchValue, setSearchValue] = useState("");
   const [insightsStatus, setInsightsStatus] = useState("Insights ready for today's clinic shift.");
+  const waitingCount = snapshot?.counts.waiting ?? queue.filter((item) => item.stage === "waiting").length;
+  const triageCount = snapshot?.counts.triage ?? queue.filter((item) => item.stage === "triage").length;
+  const roomCount = snapshot?.counts.room ?? queue.filter((item) => item.stage === "room").length;
+  const postVisitCount = snapshot?.counts.postVisit ?? queue.filter((item) => item.stage === "post-visit").length;
+  const totalPatients = snapshot?.counts.patients ?? patients.length;
+  const totalQueue = snapshot?.counts.queue ?? queue.length;
+  const avgWaitTime = Math.max(5, waitingCount * 9 + triageCount * 4);
+  const roomCapacity = 10;
+  const roomPercent = `${Math.min(100, Math.round((roomCount / roomCapacity) * 100))}%`;
+  const recentPatients = patients.slice(0, 4);
   const runAction = (actionId: InsightsClinicflowLiteActionId, message: string) => {
     setInsightsStatus(message);
     actions?.[actionId]?.();
@@ -117,12 +131,12 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Today's Total</h3>
       </div>
       <div className="flex items-baseline gap-sm">
-      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">142</span>
+      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">{totalPatients}</span>
       <span className="font-label-sm text-label-sm text-secondary flex items-center">
-      <TrendingUp className="text-[12px]" aria-hidden={true} focusable="false" /> +12%
+      <TrendingUp className="text-[12px]" aria-hidden={true} focusable="false" /> {totalQueue} queued
                                       </span>
       </div>
-      <p className="font-body-sm text-body-sm text-outline mt-1">Patients checked in today.</p>
+      <p className="font-body-sm text-body-sm text-outline mt-1">{waitingCount} waiting, {triageCount} in triage.</p>
       </div>
       </div>
       <div className="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col justify-between relative overflow-hidden">
@@ -137,13 +151,13 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Avg Wait Time</h3>
       </div>
       <div className="flex items-baseline gap-sm">
-      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">18</span>
+      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">{avgWaitTime}</span>
       <span className="font-label-md text-label-md text-on-surface-variant">mins</span>
       </div>
-      <p className="font-body-sm text-body-sm text-outline mt-1">Target is &lt; 15 mins. Capacity high.</p>
+      <p className="font-body-sm text-body-sm text-outline mt-1">Target is &lt; 15 mins. {waitingCount > 1 ? "Capacity high." : "Capacity steady."}</p>
       </div>
       <div className="absolute bottom-0 left-0 w-full h-1 bg-surface-container-highest">
-      <div className="h-full bg-error" style={{width: "75%"}}></div>
+      <div className="h-full bg-error" style={{width: `${Math.min(100, avgWaitTime * 4)}%`}}></div>
       </div>
       </div>
       <div className="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col justify-between relative overflow-hidden">
@@ -158,10 +172,10 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Room Occupancy</h3>
       </div>
       <div className="flex items-baseline gap-sm">
-      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">8</span>
-      <span className="font-label-md text-label-md text-on-surface-variant">/ 10</span>
+      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">{roomCount}</span>
+      <span className="font-label-md text-label-md text-on-surface-variant">/ {roomCapacity}</span>
       </div>
-      <p className="font-body-sm text-body-sm text-outline mt-1">Peak expected at 2:00 PM.</p>
+      <p className="font-body-sm text-body-sm text-outline mt-1">{postVisitCount} ready for post-visit closeout.</p>
       </div>
       </div>
       </div>
@@ -187,19 +201,19 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       </div>
       <div className="flex-1 flex flex-col justify-end items-center group relative z-10">
-      <div className="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style={{height: "20%"}}></div>
+      <div className="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style={{height: `${Math.max(12, totalPatients * 12)}%`}}></div>
       <span className="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">8a</span>
       </div>
       <div className="flex-1 flex flex-col justify-end items-center group relative z-10">
-      <div className="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style={{height: "45%"}}></div>
+      <div className="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style={{height: `${Math.max(18, waitingCount * 28)}%`}}></div>
       <span className="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">9a</span>
       </div>
       <div className="flex-1 flex flex-col justify-end items-center group relative z-10">
-      <div className="w-full bg-surface-tint rounded-t-sm opacity-80 hover:opacity-100 transition-opacity" style={{height: "70%"}}></div>
+      <div className="w-full bg-surface-tint rounded-t-sm opacity-80 hover:opacity-100 transition-opacity" style={{height: `${Math.max(22, triageCount * 32)}%`}}></div>
       <span className="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">10a</span>
       </div>
       <div className="flex-1 flex flex-col justify-end items-center group relative z-10">
-      <div className="w-full bg-primary rounded-t-sm transition-opacity" style={{height: "95%"}}></div>
+      <div className="w-full bg-primary rounded-t-sm transition-opacity" style={{height: roomPercent}}></div>
       <span className="font-label-sm text-label-sm text-on-surface font-bold mt-2 text-[10px] sm:text-[11px]">11a</span>
       </div>
       <div className="flex-1 flex flex-col justify-end items-center group relative z-10">
@@ -237,11 +251,11 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       <div className="ml-sm w-full">
       <div className="flex justify-between items-baseline mb-1">
-      <span className="font-data-mono text-data-mono text-on-surface">JD-492</span>
+      <span className="font-data-mono text-data-mono text-on-surface">{recentPatients[0]?.id ?? "No patient"}</span>
       <span className="font-label-sm text-label-sm text-outline">Just now</span>
       </div>
       <div className="flex items-center gap-2">
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Discharged</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">{recentPatients[0]?.name ?? "No recent activity"}</span>
       <span className="px-2 py-0.5 rounded-full bg-secondary-fixed-dim/20 text-on-secondary-container font-label-sm text-[10px] border border-secondary-fixed-dim/30">Complete</span>
       </div>
       </div>
@@ -252,11 +266,11 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       <div className="ml-sm w-full">
       <div className="flex justify-between items-baseline mb-1">
-      <span className="font-data-mono text-data-mono text-on-surface">MK-118</span>
+      <span className="font-data-mono text-data-mono text-on-surface">{recentPatients[1]?.id ?? "Queue"}</span>
       <span className="font-label-sm text-label-sm text-outline">4m ago</span>
       </div>
       <div className="flex items-center gap-2">
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Triaged → Room 3</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">{recentPatients[1]?.status ?? `${roomCount} in room`}</span>
       <span className="px-2 py-0.5 rounded-full bg-surface-variant text-on-surface font-label-sm text-[10px]">In Progress</span>
       </div>
       </div>
@@ -267,11 +281,11 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       <div className="ml-sm w-full">
       <div className="flex justify-between items-baseline mb-1">
-      <span className="font-data-mono text-data-mono text-on-surface">AL-902</span>
+      <span className="font-data-mono text-data-mono text-on-surface">{recentPatients[2]?.id ?? "Alerts"}</span>
       <span className="font-label-sm text-label-sm text-outline">12m ago</span>
       </div>
       <div className="flex items-center gap-2">
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Status Escalation</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">{recentPatients[2]?.priority ?? "No escalations"}</span>
       <span className="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-[10px] border border-error/20">Urgent</span>
       </div>
       </div>
@@ -282,11 +296,11 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       <div className="ml-sm w-full">
       <div className="flex justify-between items-baseline mb-1">
-      <span className="font-data-mono text-data-mono text-on-surface">RT-055</span>
+      <span className="font-data-mono text-data-mono text-on-surface">{recentPatients[3]?.id ?? "Check-in"}</span>
       <span className="font-label-sm text-label-sm text-outline">18m ago</span>
       </div>
       <div className="flex items-center gap-2">
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Checked In</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">{recentPatients[3]?.appointmentTime ?? `${waitingCount} waiting`}</span>
       <span className="px-2 py-0.5 rounded-full bg-surface-variant text-on-surface font-label-sm text-[10px]">Pending</span>
       </div>
       </div>
