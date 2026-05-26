@@ -7,16 +7,75 @@
 // 3. Wire interactive controls through the typed actions prop
 // 4. Replace placeholder data with props/state
 
+import { useEffect, useMemo, useState } from "react";
 import { BarChart3, Bell, CheckCircle2, CircleUserRound, Clock, DoorOpen, HeartPulse, ListFilter, ListOrdered, Menu, Plus, Search, Settings, TriangleAlert, User, UserSearch } from "lucide-react";
+import type { ClinicflowLitePatient, ClinicflowLiteQueueItem } from "../features/clinicflow-lite/clinicflow-lite.store";
 
 
 export type QueueAndStatusManagementClinicflowLiteActionId = "create-appointment-1" | "filter-2" | "move-to-triage-3" | "move-to-triage-4" | "move-to-triage-5" | "move-to-room-6" | "move-to-room-7" | "post-visit-8" | "patient-operations-1" | "queue-2" | "insights-3" | "settings-4";
 
 export interface QueueAndStatusManagementClinicflowLiteProps {
   actions?: Partial<Record<QueueAndStatusManagementClinicflowLiteActionId, () => void>>;
+  patients?: ClinicflowLitePatient[];
+  queue?: ClinicflowLiteQueueItem[];
 }
 
-export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStatusManagementClinicflowLiteProps) {
+export function QueueAndStatusManagementClinicflowLite({ actions, patients = [], queue = [] }: QueueAndStatusManagementClinicflowLiteProps) {
+  const patientById = useMemo(
+    () => Object.fromEntries(patients.map((patient) => [patient.id, patient])),
+    [patients],
+  );
+  const initialRecordStages = useMemo(
+    () => Object.fromEntries(queue.map((item) => [item.patientId, item.stage])) as Record<string, ClinicflowLiteQueueItem["stage"]>,
+    [queue],
+  );
+  const [recordStages, setRecordStages] = useState<Record<string, ClinicflowLiteQueueItem["stage"]>>(initialRecordStages);
+  const [queueSearch, setQueueSearch] = useState("");
+  const [queueUpdate, setQueueUpdate] = useState("Queue ready for status updates.");
+  useEffect(() => {
+    setRecordStages(initialRecordStages);
+  }, [initialRecordStages]);
+  const laneCounts = useMemo(
+    () => ({
+      waiting: Object.values(recordStages).filter((stage) => stage === "waiting").length,
+      triage: Object.values(recordStages).filter((stage) => stage === "triage").length,
+      room: Object.values(recordStages).filter((stage) => stage === "room").length,
+      postVisit: Object.values(recordStages).filter((stage) => stage === "post-visit").length,
+    }),
+    [recordStages],
+  );
+  const recordsByStage = useMemo(
+    () => ({
+      waiting: Object.entries(recordStages).filter((entry) => entry[1] === "waiting").map(([patientId]) => patientById[patientId]).filter(Boolean),
+      triage: Object.entries(recordStages).filter((entry) => entry[1] === "triage").map(([patientId]) => patientById[patientId]).filter(Boolean),
+      room: Object.entries(recordStages).filter((entry) => entry[1] === "room").map(([patientId]) => patientById[patientId]).filter(Boolean),
+    }),
+    [patientById, recordStages],
+  );
+  const waitingPatients = recordsByStage.waiting;
+  const triagePatients = recordsByStage.triage;
+  const roomPatients = recordsByStage.room;
+  const firstWaiting = waitingPatients[0] ?? patients[0];
+  const secondWaiting = waitingPatients[1] ?? patients[1] ?? firstWaiting;
+  const thirdWaiting = waitingPatients[2] ?? patients[2] ?? secondWaiting;
+  const firstTriage = triagePatients[0] ?? patients.find((patient) => patient.priority === "Urgent") ?? patients[0];
+  const secondTriage = triagePatients[1] ?? patients[1] ?? firstTriage;
+  const firstRoom = roomPatients[0] ?? patients.find((patient) => patient.status.toLowerCase().includes("room")) ?? patients[0];
+  const updateRecordStage = (
+    recordId: string | undefined,
+    stage: ClinicflowLiteQueueItem["stage"],
+    message: string,
+    actionId: QueueAndStatusManagementClinicflowLiteActionId,
+  ) => {
+    if (!recordId) {
+      setQueueUpdate("No queue record is available for this status update.");
+      return;
+    }
+    setRecordStages((current) => ({ ...current, [recordId]: stage }));
+    setQueueUpdate(message);
+    actions?.[actionId]?.();
+  };
+
   return (
     <>
       {/* SideNavBar (Desktop) */}
@@ -31,25 +90,25 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
               </button>
       <ul className="flex flex-col gap-xs flex-1">
       <li className="rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors cursor-pointer">
-      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#" data-action-id="patient-operations-1" onClick={actions?.["patient-operations-1"]}>
+      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#/patient-operations" data-action-id="patient-operations-1" onClick={actions?.["patient-operations-1"]}>
       <UserSearch aria-hidden={true} focusable="false" />
                           Patient Operations
                       </a>
       </li>
       <li className="bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container font-semibold rounded-lg transition-colors cursor-pointer">
-      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#" data-action-id="queue-2" onClick={actions?.["queue-2"]}>
+      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#/queue" data-action-id="queue-2" onClick={actions?.["queue-2"]}>
       <ListOrdered  style={{fontVariationSettings: "'FILL' 1"}} aria-hidden={true} focusable="false" />
                           Queue
                       </a>
       </li>
       <li className="rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors cursor-pointer">
-      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#" data-action-id="insights-3" onClick={actions?.["insights-3"]}>
+      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#/insights" data-action-id="insights-3" onClick={actions?.["insights-3"]}>
       <BarChart3 aria-hidden={true} focusable="false" />
                           Insights
                       </a>
       </li>
       <li className="rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors cursor-pointer mt-auto">
-      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#" data-action-id="settings-4" onClick={actions?.["settings-4"]}>
+      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#/settings" data-action-id="settings-4" onClick={actions?.["settings-4"]}>
       <Settings aria-hidden={true} focusable="false" />
                           Settings
                       </a>
@@ -82,11 +141,15 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <div>
       <h2 className="font-headline-md text-headline-md text-on-surface">Queue Management</h2>
       <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">Real-time patient flow and status.</p>
+      <p className="font-label-sm text-label-sm text-primary mt-xs" aria-live="polite">{queueUpdate}</p>
       </div>
       <div className="flex gap-sm">
       <div className="flex items-center bg-surface-container-low rounded border border-outline-variant px-sm py-xs">
       <Search  style={{fontSize: "16px"}} className="text-outline mr-xs" aria-hidden={true} focusable="false" />
-      <input className="bg-transparent border-none focus:ring-0 font-body-sm text-body-sm text-on-surface w-48 p-0" placeholder="Search patient..." type="text" />
+      <input className="bg-transparent border-none focus:ring-0 font-body-sm text-body-sm text-on-surface w-48 p-0" placeholder="Search patient..." type="text" value={queueSearch} onChange={(event) => {
+      setQueueSearch(event.target.value);
+      setQueueUpdate(event.target.value.trim() ? `Searching queue for ${event.target.value}.` : "Queue search cleared.");
+      }} />
       </div>
       <button className="bg-surface-container-low border border-outline-variant text-on-surface font-label-md text-label-md py-xs px-sm rounded flex items-center gap-xs hover:bg-surface-container-highest transition-colors" type="button" data-action-id="filter-2" onClick={actions?.["filter-2"]}>
       <ListFilter  style={{fontSize: "16px"}} aria-hidden={true} focusable="false" />
@@ -103,24 +166,24 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <span className="w-2 h-2 rounded-full bg-outline"></span>
                               Check-in
                           </h3>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">3</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">{laneCounts.waiting}</span>
       </div>
       <div className="p-sm flex flex-col gap-sm overflow-y-auto lane-scroll flex-1">
       {/* Card 1 */}
       <div className="bg-surface border border-outline-variant rounded p-sm hover:shadow-sm transition-shadow cursor-pointer flex flex-col gap-sm">
       <div className="flex justify-between items-start">
       <div>
-      <p className="font-body-md text-body-md text-on-surface font-medium">Sarah Jenkins</p>
-      <p className="font-label-sm text-label-sm text-on-surface-variant">DOB: 04/12/1985</p>
+      <p className="font-body-md text-body-md text-on-surface font-medium">{firstWaiting?.name ?? "No waiting patient"}</p>
+      <p className="font-label-sm text-label-sm text-on-surface-variant">{firstWaiting ? `Last visit: ${firstWaiting.lastVisit}` : "Queue is clear"}</p>
       </div>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">10:15 AM</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">{firstWaiting?.appointmentTime ?? "--"}</span>
       </div>
       <div className="flex justify-between items-end">
       <div className="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm">
       <Clock  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
-                                      Wait: 12m
+                                      Wait: {Math.max(5, laneCounts.waiting * 6)}m
                                   </div>
-      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" type="button" data-action-id="move-to-triage-3" onClick={actions?.["move-to-triage-3"]}>
+      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors" type="button" aria-label="Move to Triage" data-action-id="move-to-triage-3" onClick={() => updateRecordStage(firstWaiting?.id, "triage", `${firstWaiting?.name ?? "Patient"} moved to triage.`, "move-to-triage-3")}>
                                       Move to Triage
                                   </button>
       </div>
@@ -129,8 +192,8 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <div className="bg-surface border border-outline-variant rounded p-sm hover:shadow-sm transition-shadow cursor-pointer flex flex-col gap-sm border-l-2 border-l-error">
       <div className="flex justify-between items-start">
       <div>
-      <p className="font-body-md text-body-md text-on-surface font-medium">Michael Chang</p>
-      <p className="font-label-sm text-label-sm text-on-surface-variant">DOB: 11/05/1972</p>
+      <p className="font-body-md text-body-md text-on-surface font-medium">{secondWaiting?.name ?? "No urgent patient"}</p>
+      <p className="font-label-sm text-label-sm text-on-surface-variant">{secondWaiting ? `Priority: ${secondWaiting.priority}` : "No escalation"}</p>
       </div>
       <span className="bg-error-container text-on-error-container font-label-sm text-label-sm px-2 py-0.5 rounded flex items-center gap-xs">
       <TriangleAlert  style={{fontSize: "12px", fontVariationSettings: "'FILL' 1"}} aria-hidden={true} focusable="false" />
@@ -140,9 +203,9 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <div className="flex justify-between items-end">
       <div className="flex items-center gap-xs text-error font-label-sm text-label-sm">
       <Clock  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
-                                      Wait: 35m
+                                      Wait: {Math.max(10, laneCounts.waiting * 11)}m
                                   </div>
-      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" data-action-id="move-to-triage-4" onClick={actions?.["move-to-triage-4"]}>
+      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" aria-label="Move to Triage" data-action-id="move-to-triage-4" onClick={() => updateRecordStage(secondWaiting?.id, "triage", `${secondWaiting?.name ?? "Patient"} moved to triage.`, "move-to-triage-4")}>
                                       Move to Triage
                                   </button>
       </div>
@@ -151,17 +214,17 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <div className="bg-surface border border-outline-variant rounded p-sm hover:shadow-sm transition-shadow cursor-pointer flex flex-col gap-sm">
       <div className="flex justify-between items-start">
       <div>
-      <p className="font-body-md text-body-md text-on-surface font-medium">Emily Davis</p>
-      <p className="font-label-sm text-label-sm text-on-surface-variant">DOB: 02/28/1990</p>
+      <p className="font-body-md text-body-md text-on-surface font-medium">{thirdWaiting?.name ?? "No additional patient"}</p>
+      <p className="font-label-sm text-label-sm text-on-surface-variant">{thirdWaiting ? `Status: ${thirdWaiting.status}` : "No record"}</p>
       </div>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">10:30 AM</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">{thirdWaiting?.appointmentTime ?? "--"}</span>
       </div>
       <div className="flex justify-between items-end">
       <div className="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm">
       <Clock  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
-                                      Wait: 5m
+                                      Wait: {Math.max(3, laneCounts.waiting * 4)}m
                                   </div>
-      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" data-action-id="move-to-triage-5" onClick={actions?.["move-to-triage-5"]}>
+      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" aria-label="Move to Triage" data-action-id="move-to-triage-5" onClick={() => updateRecordStage(thirdWaiting?.id, "triage", `${thirdWaiting?.name ?? "Patient"} moved to triage.`, "move-to-triage-5")}>
                                       Move to Triage
                                   </button>
       </div>
@@ -175,24 +238,24 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <span className="w-2 h-2 rounded-full bg-tertiary-container"></span>
                               Triage
                           </h3>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">2</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">{laneCounts.triage}</span>
       </div>
       <div className="p-sm flex flex-col gap-sm overflow-y-auto lane-scroll flex-1">
       {/* Card */}
       <div className="bg-surface border border-outline-variant rounded p-sm hover:shadow-sm transition-shadow cursor-pointer flex flex-col gap-sm">
       <div className="flex justify-between items-start">
       <div>
-      <p className="font-body-md text-body-md text-on-surface font-medium">Robert Wilson</p>
-      <p className="font-label-sm text-label-sm text-on-surface-variant">Vitals Pending</p>
+      <p className="font-body-md text-body-md text-on-surface font-medium">{firstTriage?.name ?? "No triage patient"}</p>
+      <p className="font-label-sm text-label-sm text-on-surface-variant">{firstTriage ? firstTriage.status : "Vitals complete"}</p>
       </div>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">09:50 AM</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">{firstTriage?.appointmentTime ?? "--"}</span>
       </div>
       <div className="flex justify-between items-end">
       <div className="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm">
       <HeartPulse  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
                                       Nurse Joy
                                   </div>
-      <button className="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded hover:opacity-90 transition-opacity" type="button" data-action-id="move-to-room-6" onClick={actions?.["move-to-room-6"]}>
+      <button className="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded hover:opacity-90 transition-opacity" type="button" aria-label="Move to Room" data-action-id="move-to-room-6" onClick={() => updateRecordStage(firstTriage?.id, "room", `${firstTriage?.name ?? "Patient"} moved to room.`, "move-to-room-6")}>
                                       Move to Room
                                   </button>
       </div>
@@ -201,17 +264,17 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <div className="bg-surface border border-outline-variant rounded p-sm hover:shadow-sm transition-shadow cursor-pointer flex flex-col gap-sm">
       <div className="flex justify-between items-start">
       <div>
-      <p className="font-body-md text-body-md text-on-surface font-medium">Lisa Carter</p>
-      <p className="font-label-sm text-label-sm text-on-surface-variant">Reviewing History</p>
+      <p className="font-body-md text-body-md text-on-surface font-medium">{secondTriage?.name ?? "No secondary triage"}</p>
+      <p className="font-label-sm text-label-sm text-on-surface-variant">{secondTriage ? `Priority: ${secondTriage.priority}` : "No record"}</p>
       </div>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">10:05 AM</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">{secondTriage?.appointmentTime ?? "--"}</span>
       </div>
       <div className="flex justify-between items-end">
       <div className="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm">
       <HeartPulse  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
                                       Nurse Sam
                                   </div>
-      <button className="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded hover:opacity-90 transition-opacity" type="button" data-action-id="move-to-room-7" onClick={actions?.["move-to-room-7"]}>
+      <button className="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded hover:opacity-90 transition-opacity" type="button" aria-label="Move to Room" data-action-id="move-to-room-7" onClick={() => updateRecordStage(secondTriage?.id, "room", `${secondTriage?.name ?? "Patient"} moved to room.`, "move-to-room-7")}>
                                       Move to Room
                                   </button>
       </div>
@@ -225,26 +288,26 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <span className="w-2 h-2 rounded-full bg-primary"></span>
                               In-Room
                           </h3>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">1</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">{laneCounts.room}</span>
       </div>
       <div className="p-sm flex flex-col gap-sm overflow-y-auto lane-scroll flex-1">
       {/* Card */}
       <div className="bg-surface border border-outline-variant rounded p-sm hover:shadow-sm transition-shadow cursor-pointer flex flex-col gap-sm border-l-2 border-l-primary">
       <div className="flex justify-between items-start">
       <div>
-      <p className="font-body-md text-body-md text-on-surface font-medium">David Miller</p>
+      <p className="font-body-md text-body-md text-on-surface font-medium">{firstRoom?.name ?? "No room patient"}</p>
       <p className="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs mt-xs">
       <DoorOpen  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" /> Room 3
                                       </p>
       </div>
-      <span className="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-0.5 rounded">Dr. Smith</span>
+      <span className="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-0.5 rounded">{firstRoom?.priority ?? "Routine"}</span>
       </div>
       <div className="flex justify-between items-end mt-xs">
       <div className="flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm">
       <Clock  style={{fontSize: "14px"}} aria-hidden={true} focusable="false" />
                                       In Session: 18m
                                   </div>
-      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" data-action-id="post-visit-8" onClick={actions?.["post-visit-8"]}>
+      <button className="text-primary font-label-sm text-label-sm border border-primary px-2 py-1 rounded hover:bg-primary-fixed transition-colors" type="button" aria-label="Post-Visit" data-action-id="post-visit-8" onClick={() => updateRecordStage(firstRoom?.id, "post-visit", `${firstRoom?.name ?? "Patient"} moved to post-visit.`, "post-visit-8")}>
                                       Post-Visit
                                   </button>
       </div>
@@ -258,11 +321,11 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <span className="w-2 h-2 rounded-full bg-secondary"></span>
                               Post-Visit
                           </h3>
-      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">0</span>
+      <span className="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded-full">{laneCounts.postVisit}</span>
       </div>
       <div className="p-sm flex flex-col gap-sm overflow-y-auto lane-scroll flex-1 items-center justify-center text-center">
       <CheckCircle2  style={{fontSize: "32px"}} className="text-outline-variant" aria-hidden={true} focusable="false" />
-      <p className="font-body-sm text-body-sm text-on-surface-variant mt-sm">No patients awaiting discharge.</p>
+      <p className="font-body-sm text-body-sm text-on-surface-variant mt-sm">{laneCounts.postVisit === 0 ? "No patients awaiting discharge." : `${laneCounts.postVisit} patient${laneCounts.postVisit === 1 ? "" : "s"} awaiting discharge.`}</p>
       </div>
       </div>
       </div>

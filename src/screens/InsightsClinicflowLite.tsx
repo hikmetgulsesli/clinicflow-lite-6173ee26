@@ -7,16 +7,38 @@
 // 3. Wire interactive controls through the typed actions prop
 // 4. Replace placeholder data with props/state
 
+import { useState } from "react";
 import { ArrowRight, BadgeAlert, BarChart3, Bed, Bell, BriefcaseMedical, CalendarDays, Check, Clock, DoorOpen, Download, EllipsisVertical, ListOrdered, Plus, Search, Settings, Timer, TrendingUp, User, UserCheck, UserSearch, UsersRound } from "lucide-react";
+import type { ClinicflowLitePatient, ClinicflowLiteQueueItem, ClinicflowLiteSnapshot } from "../features/clinicflow-lite/clinicflow-lite.store";
 
 
 export type InsightsClinicflowLiteActionId = "create-appointment-1" | "notifications-2" | "button-3-3" | "export-summary-4" | "more-vert-5" | "patient-operations-1" | "queue-2" | "insights-3" | "settings-4";
 
 export interface InsightsClinicflowLiteProps {
   actions?: Partial<Record<InsightsClinicflowLiteActionId, () => void>>;
+  patients?: ClinicflowLitePatient[];
+  queue?: ClinicflowLiteQueueItem[];
+  snapshot?: ClinicflowLiteSnapshot;
 }
 
-export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps) {
+export function InsightsClinicflowLite({ actions, patients = [], queue = [], snapshot }: InsightsClinicflowLiteProps) {
+  const [searchValue, setSearchValue] = useState("");
+  const [insightsStatus, setInsightsStatus] = useState("Insights ready for today's clinic shift.");
+  const waitingCount = snapshot?.counts.waiting ?? queue.filter((item) => item.stage === "waiting").length;
+  const triageCount = snapshot?.counts.triage ?? queue.filter((item) => item.stage === "triage").length;
+  const roomCount = snapshot?.counts.room ?? queue.filter((item) => item.stage === "room").length;
+  const postVisitCount = snapshot?.counts.postVisit ?? queue.filter((item) => item.stage === "post-visit").length;
+  const totalPatients = snapshot?.counts.patients ?? patients.length;
+  const totalQueue = snapshot?.counts.queue ?? queue.length;
+  const avgWaitTime = Math.max(5, waitingCount * 9 + triageCount * 4);
+  const roomCapacity = 10;
+  const roomPercent = `${Math.min(100, Math.round((roomCount / roomCapacity) * 100))}%`;
+  const recentPatients = patients.slice(0, 4);
+  const runAction = (actionId: InsightsClinicflowLiteActionId, message: string) => {
+    setInsightsStatus(message);
+    actions?.[actionId]?.();
+  };
+
   return (
     <>
       <aside className="fixed left-0 top-0 h-full flex flex-col p-md gap-sm bg-surface-container-low border-r border-outline-variant w-64 z-20 hidden md:flex">
@@ -30,26 +52,26 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       </div>
       <nav className="flex-1 space-y-xs">
-      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#" data-action-id="patient-operations-1" onClick={actions?.["patient-operations-1"]}>
+      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#/patient-operations" data-action-id="patient-operations-1" onClick={() => runAction("patient-operations-1", "Opening patient operations.")}>
       <UserSearch className="text-[20px]" aria-hidden={true} focusable="false" />
                       Patient Operations
                   </a>
-      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#" data-action-id="queue-2" onClick={actions?.["queue-2"]}>
+      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#/queue" data-action-id="queue-2" onClick={() => runAction("queue-2", "Opening queue management.")}>
       <ListOrdered className="text-[20px]" aria-hidden={true} focusable="false" />
                       Queue
                   </a>
-      <a className="flex items-center gap-md px-sm py-2 rounded-lg bg-primary-container text-on-primary-container font-semibold font-label-md text-label-md relative overflow-hidden group" href="#" data-action-id="insights-3" onClick={actions?.["insights-3"]}>
+      <a className="flex items-center gap-md px-sm py-2 rounded-lg bg-primary-container text-on-primary-container font-semibold font-label-md text-label-md relative overflow-hidden group" href="#/insights" data-action-id="insights-3" onClick={() => runAction("insights-3", "Insights view is already active.")}>
       <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
       <BarChart3 className="text-[20px] fill-icon" aria-hidden={true} focusable="false" />
                       Insights
                   </a>
-      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#" data-action-id="settings-4" onClick={actions?.["settings-4"]}>
+      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#/settings" data-action-id="settings-4" onClick={() => runAction("settings-4", "Opening settings.")}>
       <Settings className="text-[20px]" aria-hidden={true} focusable="false" />
                       Settings
                   </a>
       </nav>
       <div className="mt-auto border-t border-outline-variant pt-md">
-      <button className="w-full flex items-center justify-center gap-sm bg-primary text-on-primary py-2 px-md rounded font-label-md text-label-md hover:bg-primary/90 transition-colors" type="button" data-action-id="create-appointment-1" onClick={actions?.["create-appointment-1"]}>
+      <button className="w-full flex items-center justify-center gap-sm bg-primary text-on-primary py-2 px-md rounded font-label-md text-label-md hover:bg-primary/90 transition-colors" type="button" data-action-id="create-appointment-1" onClick={() => runAction("create-appointment-1", "Opening appointment queue.")}>
       <Plus className="text-[18px]" aria-hidden={true} focusable="false" />
                       Create Appointment
                   </button>
@@ -60,16 +82,19 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <div className="flex items-center w-1/3 min-w-[200px]">
       <div className="relative w-full max-w-sm flex items-center">
       <Search className="absolute left-2 text-outline text-[18px] pointer-events-none" aria-hidden={true} focusable="false" />
-      <input className="w-full h-8 pl-8 pr-sm bg-surface border border-outline-variant rounded font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" placeholder="Search patients, IDs..." type="text" />
+      <input className="w-full h-8 pl-8 pr-sm bg-surface border border-outline-variant rounded font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" placeholder="Search patients, IDs..." type="text" value={searchValue} onChange={(event) => {
+      setSearchValue(event.target.value);
+      setInsightsStatus(event.target.value.trim() ? `Filtering insights for ${event.target.value}.` : "Search cleared; showing all insight metrics.");
+      }} />
       </div>
       </div>
       <div className="flex items-center gap-sm">
-      <button className="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-low transition-colors relative" type="button" aria-label="Notifications" data-action-id="notifications-2" onClick={actions?.["notifications-2"]}>
+      <button className="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-low transition-colors relative" type="button" aria-label="Notifications" data-action-id="notifications-2" onClick={() => runAction("notifications-2", "Opening notifications.")}>
       <Bell className="text-[20px]" aria-hidden={true} focusable="false" />
       <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full border border-surface"></span>
       </button>
       <div className="h-4 w-[1px] bg-outline-variant mx-xs"></div>
-      <button className="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden hover:opacity-80 transition-opacity" type="button" aria-label="Button 3" data-action-id="button-3-3" onClick={actions?.["button-3-3"]}>
+      <button className="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden hover:opacity-80 transition-opacity" type="button" aria-label="Button 3" data-action-id="button-3-3" onClick={() => runAction("button-3-3", "Administrator profile selected.")}>
       <img alt="Clinic Administrator" className="w-full h-full object-cover" data-alt="A professional headshot of a female clinic administrator in a well-lit modern medical office, wearing a neat navy blue blazer over a light blue shirt. The background is slightly blurred showing clean white walls and subtle medical equipment. Soft, natural lighting. High quality corporate portrait photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOEI2KeELx2ZUMtUcn_Ktxnp79V6R76TGqv7oNpvE_TRzwQhkmWPtiYyZhDmBe1ck-TFpo56bSsqRaGn4AYf34TzWkTwjsvSsw98dJzk5NTbBsyXp1gikVXTFPSDN8BWspb0b_ga5vEVYHL54D-pt1cSEX0yF5w0cwui-64d_rhSzV5eWu_4eIa4ImYQKr7iOr5xJwA1CN5nYiXy_ep8MLEYQOfQBY1nNHHqhzW60eZ0rnueCydi4VjG1eLbI5IGoiHPBPzviM3EI-" />
       </button>
       </div>
@@ -80,13 +105,14 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <div>
       <h2 className="font-headline-lg text-headline-lg text-on-surface">Daily Overview</h2>
       <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">Real-time metrics for current operational shift.</p>
+      <p className="font-label-sm text-label-sm text-primary mt-xs" aria-live="polite">{insightsStatus}</p>
       </div>
       <div className="flex items-center gap-sm">
       <div className="flex items-center gap-xs px-sm py-1.5 bg-surface-container rounded border border-outline-variant">
       <CalendarDays className="text-[16px] text-on-surface-variant" aria-hidden={true} focusable="false" />
       <span className="font-label-sm text-label-sm text-on-surface">Today, Oct 24</span>
       </div>
-      <button className="flex items-center gap-xs px-md py-1.5 border border-primary text-primary rounded font-label-md text-label-md hover:bg-primary/5 transition-colors" type="button" data-action-id="export-summary-4" onClick={actions?.["export-summary-4"]}>
+      <button className="flex items-center gap-xs px-md py-1.5 border border-primary text-primary rounded font-label-md text-label-md hover:bg-primary/5 transition-colors" type="button" data-action-id="export-summary-4" onClick={() => runAction("export-summary-4", "Summary export prepared for today's shift.")}>
       <Download className="text-[16px]" aria-hidden={true} focusable="false" />
                                   Export Summary
                               </button>
@@ -105,12 +131,12 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Today's Total</h3>
       </div>
       <div className="flex items-baseline gap-sm">
-      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">142</span>
+      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">{totalPatients}</span>
       <span className="font-label-sm text-label-sm text-secondary flex items-center">
-      <TrendingUp className="text-[12px]" aria-hidden={true} focusable="false" /> +12%
+      <TrendingUp className="text-[12px]" aria-hidden={true} focusable="false" /> {totalQueue} queued
                                       </span>
       </div>
-      <p className="font-body-sm text-body-sm text-outline mt-1">Patients checked in today.</p>
+      <p className="font-body-sm text-body-sm text-outline mt-1">{waitingCount} waiting, {triageCount} in triage.</p>
       </div>
       </div>
       <div className="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col justify-between relative overflow-hidden">
@@ -125,13 +151,13 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Avg Wait Time</h3>
       </div>
       <div className="flex items-baseline gap-sm">
-      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">18</span>
+      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">{avgWaitTime}</span>
       <span className="font-label-md text-label-md text-on-surface-variant">mins</span>
       </div>
-      <p className="font-body-sm text-body-sm text-outline mt-1">Target is &lt; 15 mins. Capacity high.</p>
+      <p className="font-body-sm text-body-sm text-outline mt-1">Target is &lt; 15 mins. {waitingCount > 1 ? "Capacity high." : "Capacity steady."}</p>
       </div>
       <div className="absolute bottom-0 left-0 w-full h-1 bg-surface-container-highest">
-      <div className="h-full bg-error" style={{width: "75%"}}></div>
+      <div className="h-full bg-error" style={{width: `${Math.min(100, avgWaitTime * 4)}%`}}></div>
       </div>
       </div>
       <div className="bg-surface-container-lowest border border-outline-variant rounded p-md flex flex-col justify-between relative overflow-hidden">
@@ -146,10 +172,10 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <h3 className="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Room Occupancy</h3>
       </div>
       <div className="flex items-baseline gap-sm">
-      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">8</span>
-      <span className="font-label-md text-label-md text-on-surface-variant">/ 10</span>
+      <span className="font-headline-lg text-headline-lg text-on-surface text-[32px]">{roomCount}</span>
+      <span className="font-label-md text-label-md text-on-surface-variant">/ {roomCapacity}</span>
       </div>
-      <p className="font-body-sm text-body-sm text-outline mt-1">Peak expected at 2:00 PM.</p>
+      <p className="font-body-sm text-body-sm text-outline mt-1">{postVisitCount} ready for post-visit closeout.</p>
       </div>
       </div>
       </div>
@@ -157,7 +183,7 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <div className="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded flex flex-col h-[400px]">
       <div className="px-md py-sm border-b border-outline-variant flex justify-between items-center bg-surface-bright/50 rounded-t">
       <h3 className="font-label-md text-label-md text-on-surface">Patient Volume by Hour</h3>
-      <button className="text-on-surface-variant hover:text-on-surface" type="button" aria-label="More Vert" data-action-id="more-vert-5" onClick={actions?.["more-vert-5"]}>
+      <button className="text-on-surface-variant hover:text-on-surface" type="button" aria-label="More Vert" data-action-id="more-vert-5" onClick={() => runAction("more-vert-5", "Patient volume options opened.")}>
       <EllipsisVertical className="text-[18px]" aria-hidden={true} focusable="false" />
       </button>
       </div>
@@ -175,19 +201,19 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       </div>
       <div className="flex-1 flex flex-col justify-end items-center group relative z-10">
-      <div className="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style={{height: "20%"}}></div>
+      <div className="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style={{height: `${Math.max(12, totalPatients * 12)}%`}}></div>
       <span className="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">8a</span>
       </div>
       <div className="flex-1 flex flex-col justify-end items-center group relative z-10">
-      <div className="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style={{height: "45%"}}></div>
+      <div className="w-full bg-surface-tint rounded-t-sm opacity-60 hover:opacity-100 transition-opacity" style={{height: `${Math.max(18, waitingCount * 28)}%`}}></div>
       <span className="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">9a</span>
       </div>
       <div className="flex-1 flex flex-col justify-end items-center group relative z-10">
-      <div className="w-full bg-surface-tint rounded-t-sm opacity-80 hover:opacity-100 transition-opacity" style={{height: "70%"}}></div>
+      <div className="w-full bg-surface-tint rounded-t-sm opacity-80 hover:opacity-100 transition-opacity" style={{height: `${Math.max(22, triageCount * 32)}%`}}></div>
       <span className="font-label-sm text-label-sm text-outline mt-2 text-[10px] sm:text-[11px]">10a</span>
       </div>
       <div className="flex-1 flex flex-col justify-end items-center group relative z-10">
-      <div className="w-full bg-primary rounded-t-sm transition-opacity" style={{height: "95%"}}></div>
+      <div className="w-full bg-primary rounded-t-sm transition-opacity" style={{height: roomPercent}}></div>
       <span className="font-label-sm text-label-sm text-on-surface font-bold mt-2 text-[10px] sm:text-[11px]">11a</span>
       </div>
       <div className="flex-1 flex flex-col justify-end items-center group relative z-10">
@@ -225,11 +251,11 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       <div className="ml-sm w-full">
       <div className="flex justify-between items-baseline mb-1">
-      <span className="font-data-mono text-data-mono text-on-surface">JD-492</span>
+      <span className="font-data-mono text-data-mono text-on-surface">{recentPatients[0]?.id ?? "No patient"}</span>
       <span className="font-label-sm text-label-sm text-outline">Just now</span>
       </div>
       <div className="flex items-center gap-2">
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Discharged</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">{recentPatients[0]?.name ?? "No recent activity"}</span>
       <span className="px-2 py-0.5 rounded-full bg-secondary-fixed-dim/20 text-on-secondary-container font-label-sm text-[10px] border border-secondary-fixed-dim/30">Complete</span>
       </div>
       </div>
@@ -240,11 +266,11 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       <div className="ml-sm w-full">
       <div className="flex justify-between items-baseline mb-1">
-      <span className="font-data-mono text-data-mono text-on-surface">MK-118</span>
+      <span className="font-data-mono text-data-mono text-on-surface">{recentPatients[1]?.id ?? "Queue"}</span>
       <span className="font-label-sm text-label-sm text-outline">4m ago</span>
       </div>
       <div className="flex items-center gap-2">
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Triaged → Room 3</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">{recentPatients[1]?.status ?? `${roomCount} in room`}</span>
       <span className="px-2 py-0.5 rounded-full bg-surface-variant text-on-surface font-label-sm text-[10px]">In Progress</span>
       </div>
       </div>
@@ -255,11 +281,11 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       <div className="ml-sm w-full">
       <div className="flex justify-between items-baseline mb-1">
-      <span className="font-data-mono text-data-mono text-on-surface">AL-902</span>
+      <span className="font-data-mono text-data-mono text-on-surface">{recentPatients[2]?.id ?? "Alerts"}</span>
       <span className="font-label-sm text-label-sm text-outline">12m ago</span>
       </div>
       <div className="flex items-center gap-2">
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Status Escalation</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">{recentPatients[2]?.priority ?? "No escalations"}</span>
       <span className="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-[10px] border border-error/20">Urgent</span>
       </div>
       </div>
@@ -270,11 +296,11 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       <div className="ml-sm w-full">
       <div className="flex justify-between items-baseline mb-1">
-      <span className="font-data-mono text-data-mono text-on-surface">RT-055</span>
+      <span className="font-data-mono text-data-mono text-on-surface">{recentPatients[3]?.id ?? "Check-in"}</span>
       <span className="font-label-sm text-label-sm text-outline">18m ago</span>
       </div>
       <div className="flex items-center gap-2">
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Checked In</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">{recentPatients[3]?.appointmentTime ?? `${waitingCount} waiting`}</span>
       <span className="px-2 py-0.5 rounded-full bg-surface-variant text-on-surface font-label-sm text-[10px]">Pending</span>
       </div>
       </div>
