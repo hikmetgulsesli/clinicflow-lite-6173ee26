@@ -26,6 +26,7 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
     lisa: "triage",
     david: "room",
   });
+  const [queueSearch, setQueueSearch] = useState("");
   const [queueUpdate, setQueueUpdate] = useState("Queue ready for status updates.");
   const laneCounts = useMemo(
     () => ({
@@ -61,25 +62,25 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
               </button>
       <ul className="flex flex-col gap-xs flex-1">
       <li className="rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors cursor-pointer">
-      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#" data-action-id="patient-operations-1" onClick={actions?.["patient-operations-1"]}>
+      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#/patient-operations" data-action-id="patient-operations-1" onClick={actions?.["patient-operations-1"]}>
       <UserSearch aria-hidden={true} focusable="false" />
                           Patient Operations
                       </a>
       </li>
       <li className="bg-primary-container dark:bg-primary-container text-on-primary-container dark:text-on-primary-container font-semibold rounded-lg transition-colors cursor-pointer">
-      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#" data-action-id="queue-2" onClick={actions?.["queue-2"]}>
+      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#/queue" data-action-id="queue-2" onClick={actions?.["queue-2"]}>
       <ListOrdered  style={{fontVariationSettings: "'FILL' 1"}} aria-hidden={true} focusable="false" />
                           Queue
                       </a>
       </li>
       <li className="rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors cursor-pointer">
-      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#" data-action-id="insights-3" onClick={actions?.["insights-3"]}>
+      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#/insights" data-action-id="insights-3" onClick={actions?.["insights-3"]}>
       <BarChart3 aria-hidden={true} focusable="false" />
                           Insights
                       </a>
       </li>
       <li className="rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors cursor-pointer mt-auto">
-      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#" data-action-id="settings-4" onClick={actions?.["settings-4"]}>
+      <a className="flex items-center gap-sm px-md py-sm font-label-md text-label-md" href="#/settings" data-action-id="settings-4" onClick={actions?.["settings-4"]}>
       <Settings aria-hidden={true} focusable="false" />
                           Settings
                       </a>
@@ -117,7 +118,10 @@ export function QueueAndStatusManagementClinicflowLite({ actions }: QueueAndStat
       <div className="flex gap-sm">
       <div className="flex items-center bg-surface-container-low rounded border border-outline-variant px-sm py-xs">
       <Search  style={{fontSize: "16px"}} className="text-outline mr-xs" aria-hidden={true} focusable="false" />
-      <input className="bg-transparent border-none focus:ring-0 font-body-sm text-body-sm text-on-surface w-48 p-0" placeholder="Search patient..." type="text" />
+      <input className="bg-transparent border-none focus:ring-0 font-body-sm text-body-sm text-on-surface w-48 p-0" placeholder="Search patient..." type="text" value={queueSearch} onChange={(event) => {
+      setQueueSearch(event.target.value);
+      setQueueUpdate(event.target.value.trim() ? `Searching queue for ${event.target.value}.` : "Queue search cleared.");
+      }} />
       </div>
       <button className="bg-surface-container-low border border-outline-variant text-on-surface font-label-md text-label-md py-xs px-sm rounded flex items-center gap-xs hover:bg-surface-container-highest transition-colors" type="button" data-action-id="filter-2" onClick={actions?.["filter-2"]}>
       <ListFilter  style={{fontSize: "16px"}} aria-hidden={true} focusable="false" />

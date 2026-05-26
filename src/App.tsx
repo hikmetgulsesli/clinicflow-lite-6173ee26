@@ -111,7 +111,10 @@ export default function App() {
 
   const insightsActions = {
     'create-appointment-1': () => navigate('queue'),
-    'notifications-2': () => navigate('settings'),
+    'notifications-2': () => {
+      window.location.hash = '/notifications';
+      navigate('settings');
+    },
     'button-3-3': () => navigate('insights'),
     'export-summary-4': () => dispatch({ type: 'set-storage-status', status: 'saved' }),
     'more-vert-5': () => navigate('patient-operations'),

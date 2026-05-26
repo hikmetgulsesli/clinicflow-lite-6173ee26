@@ -7,6 +7,7 @@
 // 3. Wire interactive controls through the typed actions prop
 // 4. Replace placeholder data with props/state
 
+import { useState } from "react";
 import { ArrowRight, BadgeAlert, BarChart3, Bed, Bell, BriefcaseMedical, CalendarDays, Check, Clock, DoorOpen, Download, EllipsisVertical, ListOrdered, Plus, Search, Settings, Timer, TrendingUp, User, UserCheck, UserSearch, UsersRound } from "lucide-react";
 
 
@@ -17,6 +18,13 @@ export interface InsightsClinicflowLiteProps {
 }
 
 export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps) {
+  const [searchValue, setSearchValue] = useState("");
+  const [insightsStatus, setInsightsStatus] = useState("Insights ready for today's clinic shift.");
+  const runAction = (actionId: InsightsClinicflowLiteActionId, message: string) => {
+    setInsightsStatus(message);
+    actions?.[actionId]?.();
+  };
+
   return (
     <>
       <aside className="fixed left-0 top-0 h-full flex flex-col p-md gap-sm bg-surface-container-low border-r border-outline-variant w-64 z-20 hidden md:flex">
@@ -30,26 +38,26 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       </div>
       </div>
       <nav className="flex-1 space-y-xs">
-      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#" data-action-id="patient-operations-1" onClick={actions?.["patient-operations-1"]}>
+      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#/patient-operations" data-action-id="patient-operations-1" onClick={() => runAction("patient-operations-1", "Opening patient operations.")}>
       <UserSearch className="text-[20px]" aria-hidden={true} focusable="false" />
                       Patient Operations
                   </a>
-      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#" data-action-id="queue-2" onClick={actions?.["queue-2"]}>
+      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#/queue" data-action-id="queue-2" onClick={() => runAction("queue-2", "Opening queue management.")}>
       <ListOrdered className="text-[20px]" aria-hidden={true} focusable="false" />
                       Queue
                   </a>
-      <a className="flex items-center gap-md px-sm py-2 rounded-lg bg-primary-container text-on-primary-container font-semibold font-label-md text-label-md relative overflow-hidden group" href="#" data-action-id="insights-3" onClick={actions?.["insights-3"]}>
+      <a className="flex items-center gap-md px-sm py-2 rounded-lg bg-primary-container text-on-primary-container font-semibold font-label-md text-label-md relative overflow-hidden group" href="#/insights" data-action-id="insights-3" onClick={() => runAction("insights-3", "Insights view is already active.")}>
       <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
       <BarChart3 className="text-[20px] fill-icon" aria-hidden={true} focusable="false" />
                       Insights
                   </a>
-      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#" data-action-id="settings-4" onClick={actions?.["settings-4"]}>
+      <a className="flex items-center gap-md px-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#/settings" data-action-id="settings-4" onClick={() => runAction("settings-4", "Opening settings.")}>
       <Settings className="text-[20px]" aria-hidden={true} focusable="false" />
                       Settings
                   </a>
       </nav>
       <div className="mt-auto border-t border-outline-variant pt-md">
-      <button className="w-full flex items-center justify-center gap-sm bg-primary text-on-primary py-2 px-md rounded font-label-md text-label-md hover:bg-primary/90 transition-colors" type="button" data-action-id="create-appointment-1" onClick={actions?.["create-appointment-1"]}>
+      <button className="w-full flex items-center justify-center gap-sm bg-primary text-on-primary py-2 px-md rounded font-label-md text-label-md hover:bg-primary/90 transition-colors" type="button" data-action-id="create-appointment-1" onClick={() => runAction("create-appointment-1", "Opening appointment queue.")}>
       <Plus className="text-[18px]" aria-hidden={true} focusable="false" />
                       Create Appointment
                   </button>
@@ -60,16 +68,19 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <div className="flex items-center w-1/3 min-w-[200px]">
       <div className="relative w-full max-w-sm flex items-center">
       <Search className="absolute left-2 text-outline text-[18px] pointer-events-none" aria-hidden={true} focusable="false" />
-      <input className="w-full h-8 pl-8 pr-sm bg-surface border border-outline-variant rounded font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" placeholder="Search patients, IDs..." type="text" />
+      <input className="w-full h-8 pl-8 pr-sm bg-surface border border-outline-variant rounded font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" placeholder="Search patients, IDs..." type="text" value={searchValue} onChange={(event) => {
+      setSearchValue(event.target.value);
+      setInsightsStatus(event.target.value.trim() ? `Filtering insights for ${event.target.value}.` : "Search cleared; showing all insight metrics.");
+      }} />
       </div>
       </div>
       <div className="flex items-center gap-sm">
-      <button className="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-low transition-colors relative" type="button" aria-label="Notifications" data-action-id="notifications-2" onClick={actions?.["notifications-2"]}>
+      <button className="w-8 h-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-low transition-colors relative" type="button" aria-label="Notifications" data-action-id="notifications-2" onClick={() => runAction("notifications-2", "Opening notifications.")}>
       <Bell className="text-[20px]" aria-hidden={true} focusable="false" />
       <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full border border-surface"></span>
       </button>
       <div className="h-4 w-[1px] bg-outline-variant mx-xs"></div>
-      <button className="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden hover:opacity-80 transition-opacity" type="button" aria-label="Button 3" data-action-id="button-3-3" onClick={actions?.["button-3-3"]}>
+      <button className="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden hover:opacity-80 transition-opacity" type="button" aria-label="Button 3" data-action-id="button-3-3" onClick={() => runAction("button-3-3", "Administrator profile selected.")}>
       <img alt="Clinic Administrator" className="w-full h-full object-cover" data-alt="A professional headshot of a female clinic administrator in a well-lit modern medical office, wearing a neat navy blue blazer over a light blue shirt. The background is slightly blurred showing clean white walls and subtle medical equipment. Soft, natural lighting. High quality corporate portrait photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOEI2KeELx2ZUMtUcn_Ktxnp79V6R76TGqv7oNpvE_TRzwQhkmWPtiYyZhDmBe1ck-TFpo56bSsqRaGn4AYf34TzWkTwjsvSsw98dJzk5NTbBsyXp1gikVXTFPSDN8BWspb0b_ga5vEVYHL54D-pt1cSEX0yF5w0cwui-64d_rhSzV5eWu_4eIa4ImYQKr7iOr5xJwA1CN5nYiXy_ep8MLEYQOfQBY1nNHHqhzW60eZ0rnueCydi4VjG1eLbI5IGoiHPBPzviM3EI-" />
       </button>
       </div>
@@ -80,13 +91,14 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <div>
       <h2 className="font-headline-lg text-headline-lg text-on-surface">Daily Overview</h2>
       <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">Real-time metrics for current operational shift.</p>
+      <p className="font-label-sm text-label-sm text-primary mt-xs" aria-live="polite">{insightsStatus}</p>
       </div>
       <div className="flex items-center gap-sm">
       <div className="flex items-center gap-xs px-sm py-1.5 bg-surface-container rounded border border-outline-variant">
       <CalendarDays className="text-[16px] text-on-surface-variant" aria-hidden={true} focusable="false" />
       <span className="font-label-sm text-label-sm text-on-surface">Today, Oct 24</span>
       </div>
-      <button className="flex items-center gap-xs px-md py-1.5 border border-primary text-primary rounded font-label-md text-label-md hover:bg-primary/5 transition-colors" type="button" data-action-id="export-summary-4" onClick={actions?.["export-summary-4"]}>
+      <button className="flex items-center gap-xs px-md py-1.5 border border-primary text-primary rounded font-label-md text-label-md hover:bg-primary/5 transition-colors" type="button" data-action-id="export-summary-4" onClick={() => runAction("export-summary-4", "Summary export prepared for today's shift.")}>
       <Download className="text-[16px]" aria-hidden={true} focusable="false" />
                                   Export Summary
                               </button>
@@ -157,7 +169,7 @@ export function InsightsClinicflowLite({ actions }: InsightsClinicflowLiteProps)
       <div className="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded flex flex-col h-[400px]">
       <div className="px-md py-sm border-b border-outline-variant flex justify-between items-center bg-surface-bright/50 rounded-t">
       <h3 className="font-label-md text-label-md text-on-surface">Patient Volume by Hour</h3>
-      <button className="text-on-surface-variant hover:text-on-surface" type="button" aria-label="More Vert" data-action-id="more-vert-5" onClick={actions?.["more-vert-5"]}>
+      <button className="text-on-surface-variant hover:text-on-surface" type="button" aria-label="More Vert" data-action-id="more-vert-5" onClick={() => runAction("more-vert-5", "Patient volume options opened.")}>
       <EllipsisVertical className="text-[18px]" aria-hidden={true} focusable="false" />
       </button>
       </div>
